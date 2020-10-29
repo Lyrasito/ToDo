@@ -1,0 +1,25 @@
+<form>
+    <h3>New Task</h3>
+    <label>Submitted by:
+        <input value="{{user.name}}" #submitter>
+    </label>
+    <label>Title:
+        <input #title>
+    </label>
+    <label>Description:
+        <textarea #description></textarea>
+    </label>
+    <label>Due date:
+        <input type="date" #date>
+    </label>
+    <label>Priority Level:
+        <label for="emergency">Emergency</label>
+        <input type="radio" value="1" name="priority" id="emergency" (click)="selectPriority(1)">
+        <label for="high">High</label>
+        <input type="radio" value="2" name="priority" id="high" (click)="selectPriority(2)">
+        <label for="medium">Medium</label>
+        <input type="radio" value="3" name="priority" id="medium" (click)="selectPriority(3)">
+
+    </label>
+   <button type="button" (click)="createTask({submitter: submitter.value, title: title.value, description: description.value, dueDate: date.value, priority: priority, completed: false})">Button</button>
+</form>

@@ -1,0 +1,12 @@
+<form>
+    <label>Username
+        <input #username>
+    </label>
+    <label>Password
+        <input #password>
+    </label>
+    <button type="button" (click)="login(username.value, password.value)">Login</button>
+    <button type="button" (click)="clear()">clear</button>
+</form>
+<a routerLink="/home">Home</a>
+<div *ngIf="authenticated">You're in, {{user.name}}</div>
