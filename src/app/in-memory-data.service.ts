@@ -15,7 +15,7 @@ export class InMemoryDataService implements InMemoryDbService {
       description: "Do task 1",
       dueDate: '11/01/2020',
       priority: 3,
-      completed: false
+      completed: true
   }, {
       id: 2,
       submitter: "Kevin",
@@ -31,7 +31,7 @@ export class InMemoryDataService implements InMemoryDbService {
       description: "Do task 3",
       dueDate: '11/21/2020',
       priority: 1,
-      completed: false
+      completed: true
   }]
     return {tasks};
   }

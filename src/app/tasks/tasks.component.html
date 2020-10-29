@@ -1,10 +1,19 @@
 
 <h3><a routerLink="/create">Create Task</a></h3>
+
 <ul>
     <li *ngFor="let task of tasks">
         <p>Title: {{task.title}}</p>
         <p>Submitted by: {{task.submitter}}</p>
         <p>Description: {{task.description}}</p>
         <p>Due date: {{task.dueDate | date}}</p>
+        <p>Priority: 
+            <span *ngIf="task.priority === 1">Emergency</span>
+            <span *ngIf="task.priority === 2">High</span>
+            <span *ngIf="task.priority === 3">Medium</span>
+        </p>
+        <div *ngIf="task.completed" (click)="markCompleted(task.id)">Completed</div>
+        <div *ngIf="!task.completed" (click)="markCompleted(task.id)">Complete?</div>
+        <p (click)="deleteTask(task)">Delete Task</p>
     </li>
 </ul>

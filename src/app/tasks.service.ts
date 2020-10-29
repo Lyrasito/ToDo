@@ -11,6 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class TasksService {
   private tasksUrl = "/api/tasks";
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -23,5 +24,13 @@ export class TasksService {
 
   createTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.tasksUrl, task, this.httpOptions)
+  }
+
+  completeTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(this.tasksUrl, task, this.httpOptions)
+  }
+
+  deleteTask(task: Task) {
+    return this.http.delete(`${this.tasksUrl}/${task.id}`, this.httpOptions)
   }
 }
