@@ -46,6 +46,15 @@ export class TasksComponent implements OnInit {
     })
   }
 
+  sortTasks(value: string) {
+  
+    if(value === "date") {
+      this.sortByDate()
+    } else if (value === "priority") {
+      this.sortByPriority();
+    }
+  }
+
   filterCompleted() {
     if(!this.completedFilter){
     this.tasks = this.tasks.filter(task => !task.completed)

@@ -14,6 +14,7 @@ export class CreateTaskComponent implements OnInit {
   priority;
   user = JSON.parse(localStorage.getItem('userInfo'))
   constructor(private tasksService: TasksService) { }
+  message: string;
 
   ngOnInit(): void {
     //console.log(this.tasksService.tasks)
@@ -23,7 +24,7 @@ export class CreateTaskComponent implements OnInit {
     this.tasksService.createTask(task).subscribe
     (response => {
       //this.tasks.push(response)
-      console.log(response)
+      this.message = `Your task has been submitted!`
     })
   }
 

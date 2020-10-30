@@ -5,3 +5,8 @@
 .sticky-top {
   float: right;
 }
+
+.custom-select {
+  margin: 0 10px;
+  width: 100px;
+}

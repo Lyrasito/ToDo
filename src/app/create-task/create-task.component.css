@@ -1,0 +1,15 @@
+form {
+  margin-left: 50px;
+}
+
+.textarea {
+  width: 410px;
+}
+
+.submitted-by {
+  margin-right: 10px;
+}
+
+.alert {
+  margin-top: 10px;
+}
