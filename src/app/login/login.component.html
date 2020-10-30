@@ -1,12 +1,12 @@
-<form>
-    <label>Username
-        <input #username>
+<form class="border rounded form-group">
+    <label class="control-label">Username
+        <input class="form-control" #username>
     </label>
     <label>Password
-        <input #password>
+        <input class="form-control" #password>
     </label>
-    <button type="button" (click)="login(username.value, password.value)">Login</button>
-    <button type="button" (click)="clear()">clear</button>
+    <button type="button" class="btn btn-primary border" (click)="login(username.value, password.value)">Login</button>
+    <button type="button" class="btn btn-primary border" (click)="clear(); username.value=''; password.value=''">Clear</button>
 </form>
 <a routerLink="/home">Home</a>
 <div *ngIf="authenticated">You're in, {{user.name}}</div>

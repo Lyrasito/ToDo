@@ -1,19 +1,23 @@
 
-<h3><a routerLink="/create">Create Task</a></h3>
+<button class="btn btn-lg btn-dark sticky-top" routerLink="/create">Create Task</button>
+<h1>Current Tasks</h1>
+<button type="button" (click)="sortByDate()">Sort by Date</button>
+<button type="button" (click)="sortByPriority()">Sort by Priority</button>
+<button type="button" (click)="filterCompleted()">Filter Completed</button>
 
-<ul>
-    <li *ngFor="let task of tasks">
-        <p>Title: {{task.title}}</p>
-        <p>Submitted by: {{task.submitter}}</p>
-        <p>Description: {{task.description}}</p>
-        <p>Due date: {{task.dueDate | date}}</p>
+<ul class="list-group">
+    <li *ngFor="let task of tasks" class="list-group-item">
+        <h2>Title:  <span>{{task.title}}</span></h2>
+        <p>Submitted by: <span>{{task.submitter}}</span></p>
+        <div>Description: <div class="description border rounded">{{task.description}}</div></div>
+        <small class="label">Due date: {{task.dueDate | date}}</small>
         <p>Priority: 
             <span *ngIf="task.priority === 1">Emergency</span>
             <span *ngIf="task.priority === 2">High</span>
             <span *ngIf="task.priority === 3">Medium</span>
         </p>
-        <div *ngIf="task.completed" (click)="markCompleted(task.id)">Completed</div>
-        <div *ngIf="!task.completed" (click)="markCompleted(task.id)">Complete?</div>
-        <p (click)="deleteTask(task)">Delete Task</p>
+        <button class="btn btn-primary btn-sm" *ngIf="task.completed" (click)="markCompleted(task.id)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" class="check"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg> Completed</button>
+        <button class="btn btn-primary btn-sm" *ngIf="!task.completed" (click)="markCompleted(task.id)">Complete?</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="deleteTask(task)">Delete Task</button>
     </li>
 </ul>

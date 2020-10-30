@@ -1,0 +1,15 @@
+label {
+  display: block;
+  text-align: center;
+}
+form {
+  width: 400px;
+  margin-left: 400px;
+  text-align: center;
+}
+
+.form-control {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}

@@ -10,7 +10,8 @@ import { TasksService } from '../tasks.service';
 })
 export class TasksComponent implements OnInit {
   tasks: Task[] 
-  
+  completedFilter: Boolean
+
   constructor(private tasksService: TasksService) { }
 
   ngOnInit(): void {
@@ -31,5 +32,27 @@ export class TasksComponent implements OnInit {
     let task = this.tasks.find(task => task.id === id);
     task.completed = !task.completed;
     this.tasksService.completeTask(task).subscribe() 
+  }
+
+  sortByDate() {
+    this.tasks.sort(function(a, b) {
+      return Date.parse(a.dueDate) - Date.parse(b.dueDate)
+    })
+  }
+
+  sortByPriority() {
+    this.tasks.sort(function(a, b) {
+      return a.priority - b.priority
+    })
+  }
+
+  filterCompleted() {
+    if(!this.completedFilter){
+    this.tasks = this.tasks.filter(task => !task.completed)
+    this.completedFilter = !this.completedFilter;
+    } else {
+      this.getTasks();
+      this.completedFilter = !this.completedFilter;
+    }
   }
 }
