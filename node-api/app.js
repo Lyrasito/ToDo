@@ -40,7 +40,7 @@ const validated = (req) => {
 };
 
 const auth = (req, res, next) => {
-  console.log(auth);
+
   if (validated(req)) {
     req.isAuthenticated = true;
     next();
@@ -59,9 +59,9 @@ const isLoggedIn = (req, res, next) => {
 };
 
 app.post("/authenticate", auth, async (req, res) => {
-  console.log("access?");
-  const accessToken = await signAccessToken(req.user.id);
-  res.status(200).send({ user: req.user, token: accessToken });
+  
+  const accessToken = await signAccessToken(req.user);
+  res.status(200).send({ token: accessToken });
 });
 
 app.get("/", (req, res) => {
@@ -75,3 +75,5 @@ app.get("/getData", isLoggedIn, (req, res) => {
 app.listen(3000, () => {
   console.log("App running at 3000");
 });
+
+module.exports = users

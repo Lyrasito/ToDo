@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import  jwt_decode  from 'jwt-decode';
 
 export interface User {
   id: number;
@@ -14,14 +15,15 @@ export interface User {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  user: Object;
   authentic: Boolean;
 
   public isAuthenticated(token): Boolean {
-    let userData = JSON.parse(localStorage.getItem('userInfo'));
+    //let userData = JSON.parse(localStorage.getItem('userInfo'));
     let userToken = localStorage.getItem('userToken');
 
     if (userToken === token) {
-      console.log('log', userData.name);
+     // console.log('log', userData.name);
       this.authentic = true;
       return true;
     }
@@ -29,12 +31,12 @@ export class AuthService {
     return false;
   }
 
-  public setUserInfo(user, token) {
-    localStorage.setItem('userInfo', JSON.stringify(user));
+  public setToken(token) {
+    //localStorage.setItem('userInfo', JSON.stringify(user));
     localStorage.setItem('userToken', token);
-    // console.log(JSON.stringify(user))
-
-    //console.log('here', user, localStorage.getItem('userInfo'));
+    const decoded = jwt_decode(token);
+    this.user = decoded;
+    console.log(decoded)
   }
 
   public validate(username: string, password: string) {
@@ -48,7 +50,7 @@ export class AuthService {
         { responseType: 'json' }
       )
       .pipe(
-        map((data: { user: Object; token: string }) => {
+        map((data: { token: string }) => {
           return data;
         })
       );
