@@ -1,12 +1,27 @@
 <form class="border rounded form-group">
-    <label class="control-label">Username
-        <input class="form-control" #username>
-    </label>
-    <label>Password
-        <input class="form-control" #password>
-    </label>
-    <button type="button" class="btn btn-primary border" (click)="login(username.value, password.value)">Login</button>
-    <button type="button" class="btn btn-primary border" (click)="clear(); username.value=''; password.value=''">Clear</button>
+  <label class="control-label"
+    >Username
+    <input class="form-control" #username />
+  </label>
+  <label
+    >Password
+    <input type="password" class="form-control" #password />
+  </label>
+  <button
+    class="btn btn-primary border"
+    (click)="
+      login(username.value, password.value);
+      username.value = '';
+      password.value = ''
+    "
+  >
+    Login
+  </button>
+  <button type="button" class="btn btn-primary border" (click)="clear()">
+    Clear
+  </button>
+  <div class="alert alert-danger" *ngIf="error">
+    Invalid username or password
+  </div>
 </form>
 <a routerLink="/home">Home</a>
-<div *ngIf="authenticated">You're in, {{user.name}}</div>

@@ -9,27 +9,29 @@ import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TasksComponent } from './tasks/tasks.component';
 import { InMemoryDataService } from './in-memory-data.service';
-import { CreateTaskComponent } from './create-task/create-task.component'
-
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     TasksComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, passThruUnknownUrl: true }
-    )
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+    }),
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 /*  */

@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Task } from '../task';
 import { TasksService } from '../tasks.service';
-import { TasksComponent } from "../tasks/tasks.component"
+import { TasksComponent } from '../tasks/tasks.component';
 
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
-  styleUrls: ['./create-task.component.css']
+  styleUrls: ['./create-task.component.css'],
 })
 export class CreateTaskComponent implements OnInit {
-
   //tasks: Task[]
   priority;
-  user = JSON.parse(localStorage.getItem('userInfo'))
-  constructor(private tasksService: TasksService) { }
+  user = JSON.parse(localStorage.getItem('userInfo'));
+  constructor(private tasksService: TasksService) {}
   message: string;
 
   ngOnInit(): void {
@@ -21,15 +20,14 @@ export class CreateTaskComponent implements OnInit {
   }
 
   createTask(task) {
-    this.tasksService.createTask(task).subscribe
-    (response => {
+    this.tasksService.createTask(task).subscribe((response) => {
       //this.tasks.push(response)
-      this.message = `Your task has been submitted!`
-    })
+      this.message = `Your task has been submitted!`;
+    });
   }
 
   selectPriority(e) {
     this.priority = e;
-    console.log(this.priority)
+    console.log(this.priority);
   }
 }
