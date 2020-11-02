@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   authenticated: Boolean;
   user: Object;
+  token: string;
   error;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -19,10 +20,10 @@ export class LoginComponent implements OnInit {
   login(username, password) {
     this.authService.validate(username, password).subscribe(
       (response) => {
-        this.authService.setUserInfo(response);
-        this.user = response;
-        console.log(response);
-        this.authenticated = this.authService.isAuthenticated();
+        this.authService.setUserInfo(response.user, response.token);
+        this.user = response.user;
+        this.token = response.token;
+        this.authenticated = this.authService.isAuthenticated(this.token);
 
         this.router.navigate(['tasks']);
         //console.log("store", localStorage.getItem('userInfo'))
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
   clear() {
     localStorage.clear();
     console.log(localStorage.getItem('userInfo'));
-    this.authenticated = this.authService.isAuthenticated();
+    this.authenticated = this.authService.authentic;
   }
 }
 

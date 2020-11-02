@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { Task } from '../task';
 //import {TASKS} from "../TASKS"
 import { TasksService } from '../tasks.service';
@@ -12,7 +14,11 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   completedFilter: Boolean;
 
-  constructor(private tasksService: TasksService) {}
+  constructor(
+    private tasksService: TasksService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getTasks();
@@ -65,5 +71,10 @@ export class TasksComponent implements OnInit {
       this.getTasks();
       this.completedFilter = !this.completedFilter;
     }
+  }
+  logout() {
+    localStorage.clear();
+    this.authService.authentic = false;
+    this.router.navigate(['login']);
   }
 }
