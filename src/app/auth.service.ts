@@ -24,7 +24,7 @@ export class AuthService {
     let userToken = localStorage.getItem('userToken');
     
     
-    if (userToken === token) {
+    if (userToken && userToken === token) {
       this.authentic = true;
       return true;
     }
@@ -40,6 +40,10 @@ export class AuthService {
     const decoded = jwt_decode(token);
     this.user = decoded;
     console.log(decoded)
+  }
+
+  public getToken() {
+    return localStorage.getItem('userToken')
   }
 
   public validate(username: string, password: string) {

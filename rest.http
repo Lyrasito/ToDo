@@ -1,0 +1,15 @@
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "task": {
+        "id": 1,
+        "submitter": "Marie",
+        "title": "Task1",
+        "description": "Task1 description",
+        "dueDate": "03/03/03",
+        "priority": 1,
+        "completed": false
+    }
+    
+}

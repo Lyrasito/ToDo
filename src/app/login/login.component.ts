@@ -15,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(localStorage.getItem('userToken'))
+  }
 
   login(username, password) {
     this.authService.validate(username, password).subscribe(

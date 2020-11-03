@@ -22,6 +22,9 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
+    const userToken = localStorage.getItem('userToken')
+    this.authService.isAuthenticated(userToken);
+    console.log(userToken)
     /*
     this.authService.authenticate().subscribe(response => { 
       this.authService.isAuthenticated(response.token);

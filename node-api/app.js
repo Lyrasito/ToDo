@@ -3,9 +3,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { signAccessToken, verifyAccessToken } = require("./jwt_helper");
+const taskRouter = require('./taskRouter')
 
 app.use(express.json());
 app.use(cors());
+app.use('/tasks', taskRouter)
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const users = [
   {
