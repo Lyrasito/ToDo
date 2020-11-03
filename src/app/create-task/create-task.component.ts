@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { Task } from '../task';
 import { TasksService } from '../tasks.service';
 import { TasksComponent } from '../tasks/tasks.component';
@@ -11,8 +12,8 @@ import { TasksComponent } from '../tasks/tasks.component';
 export class CreateTaskComponent implements OnInit {
   //tasks: Task[]
   priority;
-  user = JSON.parse(localStorage.getItem('userInfo'));
-  constructor(private tasksService: TasksService) {}
+  user = this.authService.user;
+  constructor(private tasksService: TasksService, private authService: AuthService) {}
   message: string;
 
   ngOnInit(): void {

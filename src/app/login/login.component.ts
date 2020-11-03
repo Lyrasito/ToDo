@@ -8,10 +8,10 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  authenticated: Boolean;
+  authenticated;
   user: Object = this.authService.user;
   token: string;
-  error;
+  error: Object;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -21,8 +21,9 @@ export class LoginComponent implements OnInit {
     this.authService.validate(username, password).subscribe(
       (response) => {
         this.authService.setToken(response.token);
-        this.token = response.token;
-        this.authenticated = this.authService.isAuthenticated(this.token);
+        //this.token = response.token;
+        this.authService.isAuthenticated(response.token);
+        this.authenticated = this.authService.authentic
         this.router.navigate(['tasks']);
       },
       (err) => {

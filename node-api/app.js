@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { signAccessToken } = require("./jwt_helper");
+const { signAccessToken, verifyAccessToken } = require("./jwt_helper");
 
 app.use(express.json());
 app.use(cors());
@@ -58,11 +58,15 @@ const isLoggedIn = (req, res, next) => {
     .json({ statusCode: 400, message: "not authenticated" });
 };
 
-app.post("/authenticate", auth, async (req, res) => {
+app.post("/login", auth, async (req, res) => {
   
   const accessToken = await signAccessToken(req.user);
   res.status(200).send({ token: accessToken });
 });
+
+app.post("/authenticate", verifyAccessToken, async (req, res) => {
+  res.send({token: req.token})
+})
 
 app.get("/", (req, res) => {
   res.send("Hello");

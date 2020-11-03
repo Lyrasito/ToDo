@@ -17,18 +17,21 @@ export class AuthService {
 
   user: Object;
   authentic: Boolean;
+  
 
   public isAuthenticated(token): Boolean {
     //let userData = JSON.parse(localStorage.getItem('userInfo'));
     let userToken = localStorage.getItem('userToken');
-
+    
+    
     if (userToken === token) {
-     // console.log('log', userData.name);
       this.authentic = true;
       return true;
     }
     this.authentic = false;
     return false;
+    
+    
   }
 
   public setToken(token) {
@@ -42,7 +45,7 @@ export class AuthService {
   public validate(username: string, password: string) {
     return this.http
       .post(
-        'http://localhost:3000/authenticate',
+        'http://localhost:3000/login',
         {
           username: username,
           password: password,
@@ -54,6 +57,16 @@ export class AuthService {
           return data;
         })
       );
+  }
+  public authenticate() {
+    let userToken = localStorage.getItem('userToken');
+    return this.http.post('http://localhost:3000/authenticate', {}, {
+      headers: {
+        'authorization': 'Bearer ' + userToken
+      }
+    }).pipe(map((data: {authenticated: boolean}) => {
+      return data;
+    }))
   }
 }
 
