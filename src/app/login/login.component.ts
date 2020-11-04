@@ -16,15 +16,14 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('userToken'))
+    console.log(localStorage.getItem('userToken'), localStorage.getItem('refreshToken'))
   }
 
   login(username, password) {
     this.authService.validate(username, password).subscribe(
       (response) => {
-        this.authService.setToken(response.token);
-        //this.token = response.token;
-        this.authService.isAuthenticated(response.token);
+        this.authService.setToken(response.accessToken, response.refreshToken);
+        this.authService.isAuthenticated(response.accessToken);
         this.authenticated = this.authService.authentic
         this.router.navigate(['tasks']);
       },
@@ -38,6 +37,10 @@ export class LoginComponent implements OnInit {
   clear() {
     localStorage.clear();
     this.authenticated = this.authService.authentic;
+  }
+
+  refresh() {
+    this.authService.refresh();
   }
 }
 

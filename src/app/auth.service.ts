@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import  jwt_decode  from 'jwt-decode';
 
@@ -34,12 +34,13 @@ export class AuthService {
     
   }
 
-  public setToken(token) {
+  public setToken(accessToken, refreshToken) {
     //localStorage.setItem('userInfo', JSON.stringify(user));
-    localStorage.setItem('userToken', token);
-    const decoded = jwt_decode(token);
+    localStorage.setItem('userToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken)
+    const decoded = jwt_decode(accessToken);
     this.user = decoded;
-    console.log(decoded)
+    //console.log(decoded)
   }
 
   public getToken() {
@@ -57,7 +58,7 @@ export class AuthService {
         { responseType: 'json' }
       )
       .pipe(
-        map((data: { token: string }) => {
+        map((data: { accessToken: string, refreshToken: string }) => {
           return data;
         })
       );
@@ -71,6 +72,26 @@ export class AuthService {
     }).pipe(map((data: {authenticated: boolean}) => {
       return data;
     }))
+  }
+  /*
+  public refresh(refreshToken: string) {
+    return this.http.post('http://localhost:3000/refresh-token', { refreshToken }).pipe(
+      map((data: { accessToken: string, refreshToken: string }) => {
+      return data;
+      })
+    )
+  }
+  */
+ getRefreshToken() {
+   return localStorage.getItem('refreshToken')
+ }
+  public refresh() {
+    return this.http.post<any>(`http://localhost:3000/refresh-token`, {
+      'refreshToken': this.getRefreshToken()
+    }).pipe(tap((tokens) => {
+      this.setToken(tokens.accessToken, tokens.refreshToken);
+      //this.storeJwtToken(tokens.jwt);
+    }));
   }
 }
 

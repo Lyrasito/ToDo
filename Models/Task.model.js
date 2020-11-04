@@ -36,6 +36,7 @@ const UserSchema = new Schema({
 
 const Task = mongoose.model('task', UserSchema)
 
-const newTask = new Task({id: 1, submitter: "Marie", title: "Task2", description: "Task2 description", dueDate: "01/01/01", priority: 1, completed: false})
-newTask.save();
+/* const newTask = new Task({id: 1, submitter: "Marie", title: "Task2", description: "Task2 description", dueDate: "01/01/01", priority: 1, completed: false})
+newTask.save(); */
+
 module.exports = Task

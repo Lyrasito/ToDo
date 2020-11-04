@@ -1,14 +1,11 @@
 const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const { signAccessToken, verifyAccessToken } = require("./jwt_helper");
+
+const { signAccessToken, verifyAccessToken, signRefreshToken, verifyRefreshToken } = require("./jwt_helper");
 const taskRouter = require('./taskRouter')
 
-app.use(express.json());
-app.use(cors());
-app.use('/tasks', taskRouter)
-app.use(bodyParser.urlencoded({ extended: true }))
+const router = express.Router();
+
+router.use('/tasks', taskRouter)
 
 const users = [
   {
@@ -61,26 +58,42 @@ const isLoggedIn = (req, res, next) => {
     .json({ statusCode: 400, message: "not authenticated" });
 };
 
-app.post("/login", auth, async (req, res) => {
+router.post("/login", auth, async (req, res) => {
   
   const accessToken = await signAccessToken(req.user);
-  res.status(200).send({ token: accessToken });
+  const refreshToken = await signRefreshToken(req.user);
+  res.status(200).send({ accessToken, refreshToken });
 });
 
-app.post("/authenticate", verifyAccessToken, async (req, res) => {
+router.post("/authenticate", verifyAccessToken, async (req, res) => {
   res.send({token: req.token})
 })
 
-app.get("/", (req, res) => {
+router.post('/refresh-token', async (req, res, next) => {
+  try {
+    const {refreshToken} = req.body
+
+    if(!refreshToken) {
+        throw createError.BadRequest()
+    }
+    const user = await verifyRefreshToken(refreshToken);
+    //console.log("user in refresh token route", user);
+    const accessToken = await signAccessToken(user);
+    //console.log(accessToken)
+    const newRefreshToken = await signRefreshToken(user);
+    res.send({ accessToken: accessToken, refreshToken: newRefreshToken })
+} catch(err) {
+    next(err)
+}
+})
+
+router.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.get("/getData", isLoggedIn, (req, res) => {
+router.get("/getData", isLoggedIn, (req, res) => {
   res.json("data");
 });
 
-app.listen(3000, () => {
-  console.log("App running at 3000");
-});
 
-module.exports = users
+module.exports = {users, router}
