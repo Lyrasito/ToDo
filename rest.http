@@ -2,13 +2,12 @@ POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
-    "task": {
-        "id": 4,
-        "submitter": "Marie",
-        "title": "Task1",
-        "description": "Task1 description",
-        "dueDate": "11/11/11",
-        "priority": 3,
+    "task": {   
+        "submitter": "Kevin",
+        "title": "Task3",
+        "description": "Task3 description",
+        "dueDate": "11/11/12",
+        "priority": 1,
         "completed": false
     }
     
@@ -36,3 +35,17 @@ POST http://localhost:3000/refresh-token
 Content-Type: application/json
 
 { "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFyaWUiLCJ1c2VybmFtZSI6InVzZXIiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiaWQiOjEsImlhdCI6MTYwNDUwMzkxOSwiZXhwIjoxNjM2MDYxNTE5LCJhdWQiOiIxIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.UR9qBCnbU_yUVNKK-GUp1zLWU3aRPFsRJYqu8Xq3-T4"}
+
+###
+
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{ 
+    "user": {
+        "name": "Test1",
+        "username": "user",
+        "password": "password",
+        "isAdmin": false
+    }
+}

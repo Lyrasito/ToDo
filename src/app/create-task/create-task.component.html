@@ -3,7 +3,7 @@
   <div class="form-row">
     <label class="control-label submitted-by"
       >Submitted by:
-      <input  class="form-control"  #submitter />
+      <input  class="form-control" value="{{ user ? user?.name : 'name' }}" #submitter />
     </label>
     <label class="control-label"
       >Title:
@@ -66,14 +66,14 @@
     class="btn btn-primary"
     type="button"
     (click)="
-      createTask({
+      createTask({task: {
         submitter: submitter.value,
         title: title.value,
         description: description.value,
         dueDate: date.value,
         priority: priority,
         completed: false
-      })
+      }})
     "
   >
     Submit Task

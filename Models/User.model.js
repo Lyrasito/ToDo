@@ -1,38 +1,31 @@
 const mongoose = require('mongoose')
+//const { stringify } = require('querystring')
 //const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
-const TaskSchema = new Schema({
+const UserSchema = new Schema({
     
-    submitter: {
+    name: {
         type: String,
-        required: true,
+        required: true
     },
-    title: {
+    username: {
         type: String,
-        required: true,
+        required: true
     },
-    description: {
+    password: {
         type: String,
-        required: true,
+        required: true
     },
-    dueDate: {
-        type: String,
-        required: true,
-    }, 
-    priority: {
-        type: Number,
-        required: true,
-    },
-    completed: {
+    isAdmin: {
         type: Boolean,
-        required: true,
+        required: true
     }
 })
 
-const Task = mongoose.model('task', TaskSchema)
+const User = mongoose.model('user', UserSchema)
 
 /* const newTask = new Task({id: 1, submitter: "Marie", title: "Task2", description: "Task2 description", dueDate: "01/01/01", priority: 1, completed: false})
 newTask.save(); */
 
-module.exports = Task
+module.exports = User

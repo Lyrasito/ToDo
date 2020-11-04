@@ -3,11 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import  jwt_decode  from 'jwt-decode';
+import  { User } from "./user"
 
-export interface User {
-  id: number;
-  name: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +12,11 @@ export interface User {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  user: Object;
+  user: User;
   authentic: Boolean;
   
 
-  public isAuthenticated(token): Boolean {
+  public isAuthenticated(token: string): Boolean {
     //let userData = JSON.parse(localStorage.getItem('userInfo'));
     let userToken = localStorage.getItem('userToken');
     
@@ -40,7 +37,7 @@ export class AuthService {
     localStorage.setItem('refreshToken', refreshToken)
     const decoded = jwt_decode(accessToken);
     this.user = decoded;
-    //console.log(decoded)
+    console.log("1", decoded)
   }
 
   public getToken() {
@@ -82,9 +79,10 @@ export class AuthService {
     )
   }
   */
- getRefreshToken() {
-   return localStorage.getItem('refreshToken')
- }
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken')
+  }
+
   public refresh() {
     return this.http.post<any>(`http://localhost:3000/refresh-token`, {
       'refreshToken': this.getRefreshToken()

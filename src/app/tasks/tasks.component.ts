@@ -23,22 +23,8 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
-    const userToken = localStorage.getItem('userToken')
-    this.authService.isAuthenticated(userToken);
-    this.refreshToken();
-    /*
-    this.authService.authenticate().subscribe(response => { 
-      this.authService.isAuthenticated(response.token);
-      console.log(this.authService.authentic)
-      //console.log(response.token)
-      return response.token
-    },
-      error => {
-        console.log(error)
-        return false
-      })
-      */
   }
+  
   getTasks() {
     this.tasksService.getTasks().subscribe(
       //default sort by completed
