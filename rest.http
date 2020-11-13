@@ -43,8 +43,8 @@ Content-Type: application/json
 
 { 
     "user": {
-        "name": "Test1",
-        "username": "user",
+        "name": "Test2",
+        "username": "user2",
         "password": "password",
         "isAdmin": false
     }

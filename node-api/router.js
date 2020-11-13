@@ -1,11 +1,16 @@
 const express = require("express");
-const createError = require('http-errors')
-const { signAccessToken, verifyAccessToken, signRefreshToken, verifyRefreshToken } = require("./jwt_helper");
-const taskRouter = require('./taskRouter')
-const User = require('../Models/User.model')
+const createError = require("http-errors");
+const {
+  signAccessToken,
+  verifyAccessToken,
+  signRefreshToken,
+  verifyRefreshToken,
+} = require("./jwt_helper");
+const taskRouter = require("./taskRouter");
+const User = require("../Models/User.model");
 const router = express.Router();
 
-router.use('/tasks', taskRouter)
+router.use("/tasks", taskRouter);
 
 const users = [
   {
@@ -28,14 +33,13 @@ const users = [
   },
 ];
 
-
 const auth = async (req, res, next) => {
-  const user = await User.findOne({username: req.body.username})
-  if(req.body.password === user.password) {
+  const user = await User.findOne({ username: req.body.username });
+  if (req.body.password === user.password) {
     req.user = user;
     next();
   } else {
-    res.sendStatus(401)
+    res.sendStatus(401);
   }
 };
 
@@ -49,40 +53,43 @@ const isLoggedIn = (req, res, next) => {
 };
 
 router.post("/register", async (req, res, next) => {
-  const newUser = req.body.user;
-  const user = new User(newUser);
-  const savedUser = await user.save();
-  res.send({user: savedUser})
-})
+  try {
+    const newUser = req.body.user;
+    const user = new User(newUser);
+    const savedUser = await user.save();
+    res.send({ user: savedUser });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 router.post("/login", auth, async (req, res) => {
-  
   const accessToken = await signAccessToken(req.user);
   const refreshToken = await signRefreshToken(req.user);
   res.status(200).send({ accessToken, refreshToken });
 });
 
 router.post("/authenticate", verifyAccessToken, async (req, res) => {
-  res.send({token: req.token})
-})
+  res.send({ token: req.token });
+});
 
-router.post('/refresh-token', async (req, res, next) => {
+router.post("/refresh-token", async (req, res, next) => {
   try {
-    const {refreshToken} = req.body
+    const { refreshToken } = req.body;
 
-    if(!refreshToken) {
-        throw createError.BadRequest()
+    if (!refreshToken) {
+      throw createError.BadRequest();
     }
     const user = await verifyRefreshToken(refreshToken);
     //console.log("user in refresh token route", user);
     const accessToken = await signAccessToken(user);
     //console.log(accessToken)
     const newRefreshToken = await signRefreshToken(user);
-    res.send({ accessToken: accessToken, refreshToken: newRefreshToken })
-} catch(err) {
-    next(err)
-}
-})
+    res.send({ accessToken: accessToken, refreshToken: newRefreshToken });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/", (req, res) => {
   res.send("Hello");
@@ -92,5 +99,4 @@ router.get("/getData", isLoggedIn, (req, res) => {
   res.json("data");
 });
 
-
-module.exports = {users, router}
+module.exports = { users, router };

@@ -28,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.0.0",
     "mongoose": "^5.10.11",
+    "node-fetch": "^2.6.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
