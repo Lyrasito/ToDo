@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const User = require("../Models/User.model");
-
-/*const fillUsers = async () => {
+/*
+const fillUsers = async () => {
   for (let i = 0; i < 5; i++) {
     const response = await fetch("http://localhost:3000/register", {
       method: "POST",
@@ -24,6 +24,7 @@ const User = require("../Models/User.model");
 
 fillUsers();
 */
+
 const newUser = async () => {
   //console.log("something");
   const user = new User({
