@@ -84,6 +84,17 @@ router.post("/login", auth, async (req, res) => {
   );
 });
 
+router.post("/:id/comparePasswords", async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  const isMatch = await user.isValidPassword(req.body.password);
+
+  if (isMatch) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+});
+
 router.post("/authenticate", verifyAccessToken, async (req, res) => {
   res.send({ token: req.token });
 });

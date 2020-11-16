@@ -11,7 +11,7 @@ import { User } from '../user';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  user: User;
+  public user: User;
   authentic: Boolean;
 
   // user accesses (API)or Route
@@ -87,6 +87,7 @@ export class AuthService {
     localStorage.setItem('refreshToken', refreshToken);
     const decoded = jwt_decode(accessToken);
     this.user = decoded;
+    console.log(this.user);
   }
 
   public getToken() {
@@ -136,5 +137,11 @@ export class AuthService {
           return data;
         })
       );
+  }
+
+  public comparePasswords(password, id) {
+    return this.http.post(`http://localhost:3000/${id}/comparePasswords`, {
+      password,
+    });
   }
 }

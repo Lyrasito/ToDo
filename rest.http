@@ -53,3 +53,12 @@ Content-Type: application/json
 {
     "password": "123456"
 }
+
+###
+
+POST http://localhost:3000/5fb2989b07f7cf3f7028bec2/comparePasswords
+Content-Type: application/json
+
+{
+    "password": "123456"
+}
