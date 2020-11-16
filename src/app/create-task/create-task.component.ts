@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Task } from '../task';
-import { TasksService } from '../tasks.service';
+import { TasksService } from '../services/tasks.service';
 import { TasksComponent } from '../tasks/tasks.component';
 
 @Component({
@@ -13,7 +13,10 @@ export class CreateTaskComponent implements OnInit {
   //tasks: Task[]
   priority;
   user = this.authService.user;
-  constructor(private tasksService: TasksService, private authService: AuthService) {}
+  constructor(
+    private tasksService: TasksService,
+    private authService: AuthService
+  ) {}
   message: string;
 
   ngOnInit(): void {

@@ -20,32 +20,36 @@ GET http://localhost:3000/tasks
 POST http://localhost:3000/login
 Content-Type: application/json
 
-{
-    "user": {    
-    "username": "user2",
-    "password": "password2",
-    "name": "Isabelle",
-    "id": 3,
+{    
+        "username": "user",
+        "password": "password"
     }
-}
+
 
 ###
 
 POST http://localhost:3000/refresh-token
 Content-Type: application/json
 
-{ "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFyaWUiLCJ1c2VybmFtZSI6InVzZXIiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiaWQiOjEsImlhdCI6MTYwNDUwMzkxOSwiZXhwIjoxNjM2MDYxNTE5LCJhdWQiOiIxIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.UR9qBCnbU_yUVNKK-GUp1zLWU3aRPFsRJYqu8Xq3-T4"}
+{ "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInVzZXJuYW1lIjoidXNlciIsInBhc3N3b3JkIjoiJDJiJDEwJHlsMFNubnRtVHZ0eXlFem04VTVVMGVqakVhcDZwRHBXTnpjdE5HQ2ZxRVQ1bzdWNURWeTgyIiwiaWQiOiI1ZmIxNWMwNDQxODQ0ZjY4N2M0Yzg1N2IiLCJpYXQiOjE2MDU0NjY3NTgsImV4cCI6MTYwNTU1MzE1OCwiYXVkIjoiNWZiMTVjMDQ0MTg0NGY2ODdjNGM4NTdiIiwiaXNzIjoibG9jYWxob3N0OjMwMDAifQ.yhxTJ85WTs4GOGMStZQxJs9aY5d1grDRyP7vnQOdDbg"}
 
 ###
 
 POST http://localhost:3000/register
 Content-Type: application/json
 
-{ 
-    "user": {
-        "name": "Test2",
-        "username": "user2",
+{
+        "name": "User3",
+        "username": "user3",
         "password": "password",
-        "isAdmin": false
-    }
+        "isAdmin": true   
+}
+
+###
+
+PATCH http://localhost:3000/5fb15c0441844f687c4c857b
+Content-Type: application/json
+
+{
+    "password": "123456"
 }

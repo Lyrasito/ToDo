@@ -34,12 +34,22 @@ const users = [
 ];
 
 const auth = async (req, res, next) => {
-  const user = await User.findOne({ username: req.body.username });
-  if (req.body.password === user.password) {
-    req.user = user;
-    next();
-  } else {
-    res.sendStatus(401);
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) throw createError.NotFound("User not registered.");
+
+    const isMatch = await user.isValidPassword(req.body.password);
+    if (!isMatch) throw createError.Unauthorized("Username/password not valid");
+    if (isMatch) {
+      req.user = user;
+      //console.log(user);
+      next();
+    } else {
+      res.sendStatus(401);
+    }
+  } catch (err) {
+    console.log(err);
+    next(err);
   }
 };
 
@@ -54,7 +64,7 @@ const isLoggedIn = (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
   try {
-    const newUser = req.body.user;
+    const newUser = req.body;
     const user = new User(newUser);
     const savedUser = await user.save();
     res.send({ user: savedUser });
@@ -66,7 +76,12 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", auth, async (req, res) => {
   const accessToken = await signAccessToken(req.user);
   const refreshToken = await signRefreshToken(req.user);
+
   res.status(200).send({ accessToken, refreshToken });
+  await User.updateOne(
+    { _id: req.user.id },
+    { $set: { lastLogin: Date.now() } }
+  );
 });
 
 router.post("/authenticate", verifyAccessToken, async (req, res) => {
@@ -74,7 +89,9 @@ router.post("/authenticate", verifyAccessToken, async (req, res) => {
 });
 
 router.post("/refresh-token", async (req, res, next) => {
+  console.log("refreshtoken route");
   try {
+    console.log("refreshtoken route");
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
@@ -89,6 +106,12 @@ router.post("/refresh-token", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+router.patch("/:id", async (req, res) => {
+  let user = await User.findOne({ _id: req.params.id });
+  await user.updateOne({ $set: req.body });
+  res.send({ user: user });
 });
 
 router.get("/", (req, res) => {

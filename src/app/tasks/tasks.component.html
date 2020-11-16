@@ -2,6 +2,9 @@
   <button class="btn btn-lg btn-dark sticky-top" routerLink="/create">
     Create Task
   </button>
+  <button *ngIf="isAdmin()" class="btn btn-lg btn-dark sticky-top" routerLink="/register">
+    Register New User
+  </button>
   <button class="btn btn-lg btn-dark" (click)="logout()">Logout</button>
 </nav>
 <h1>Current Tasks</h1>
@@ -83,3 +86,5 @@
     </button>
   </li>
 </ul>
+
+

@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TasksComponent } from './tasks/tasks.component';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { FormsModule } from '@angular/forms';
-import { TokenInterceptorService } from './token-interceptor.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { RegisterComponent } from './register/register.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +21,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     HomeComponent,
     TasksComponent,
     CreateTaskComponent,
+    RegisterComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,11 +34,14 @@ import { TokenInterceptorService } from './token-interceptor.service';
       passThruUnknownUrl: true,
     }),
   ],
-  providers: [AuthService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

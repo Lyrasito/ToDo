@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Task } from '../task';
 //import {TASKS} from "../TASKS"
-import { TasksService } from '../tasks.service';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -24,31 +24,29 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     this.getTasks();
   }
-  
+
   getTasks() {
     this.tasksService.getTasks().subscribe(
       //default sort by completed
       (tasks) =>
         (this.tasks = tasks.sort(function (a, b) {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
-        })), error => {
-          if(error instanceof HttpErrorResponse) {
-            if(error.status === 401) {
-              this.router.navigate(['login'])
-            }
-          }
-        }
+        })),
+      (error) => {
+        console.error(error);
+      }
     );
   }
-  
+  /*
   refreshToken() {
-   // let refreshToken = localStorage.getItem('refreshToken');
+    // let refreshToken = localStorage.getItem('refreshToken');
     this.authService.refresh().subscribe((response) => {
       //console.log("first refresh", localStorage.getItem('refreshToken'))
       this.authService.setToken(response.accessToken, response.refreshToken);
-     // console.log("second refresh", localStorage.getItem('userToken'), localStorage.getItem('refreshToken'))
-    })
+      // console.log("second refresh", localStorage.getItem('userToken'), localStorage.getItem('refreshToken'))
+    });
   }
+  */
   deleteTask(task) {
     let index = this.tasks.indexOf(task);
     this.tasks.splice(index, 1);
@@ -93,5 +91,9 @@ export class TasksComponent implements OnInit {
     localStorage.clear();
     this.authService.authentic = false;
     this.router.navigate(['login']);
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 }
