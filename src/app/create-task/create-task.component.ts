@@ -20,7 +20,8 @@ export class CreateTaskComponent implements OnInit {
   message: string;
 
   ngOnInit(): void {
-    //console.log(this.tasksService.tasks)
+    this.user = this.authService.user;
+    console.log(this.authService.user);
   }
 
   createTask(task) {

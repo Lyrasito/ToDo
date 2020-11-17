@@ -85,7 +85,10 @@ router.post("/login", auth, async (req, res) => {
 });
 
 router.post("/:id/comparePasswords", async (req, res) => {
+  console.log("here");
+  console.log(req.params.id);
   const user = await User.findOne({ _id: req.params.id });
+  console.log(user);
   const isMatch = await user.isValidPassword(req.body.password);
 
   if (isMatch) {

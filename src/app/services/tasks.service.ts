@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class TasksService {
-  private tasksUrl = '/api/tasks';
+  private tasksUrl = 'http://localhost:3000/tasks/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -18,22 +18,22 @@ export class TasksService {
   constructor(private http: HttpClient) {}
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>('http://localhost:3000/tasks');
+    return this.http.get<Task[]>(this.tasksUrl);
   }
 
   createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(
-      'http://localhost:3000/tasks',
+    return this.http.post<Task>(this.tasksUrl, task, this.httpOptions);
+  }
+
+  completeTask(task: Task, taskId): Observable<Task> {
+    return this.http.patch<Task>(
+      this.tasksUrl + taskId,
       task,
       this.httpOptions
     );
   }
 
-  completeTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(this.tasksUrl, task, this.httpOptions);
-  }
-
   deleteTask(task: Task) {
-    return this.http.delete(`${this.tasksUrl}/${task.id}`, this.httpOptions);
+    return this.http.delete(`${this.tasksUrl}/${task._id}`, this.httpOptions);
   }
 }

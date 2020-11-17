@@ -14,8 +14,9 @@ export class AuthguardService implements CanActivate {
 
     return new Promise((resolve, reject) => {
       this.authService.isAuthenticated().then((isAuthenticated) => {
-        console.log('isAuthenticated', isAuthenticated);
+        //console.log('isAuthenticated', isAuthenticated);
         if (isAuthenticated) {
+          this.authService.getUser(localStorage.getItem('userToken'));
           resolve(true);
         } else {
           this.route.navigate(['login']);

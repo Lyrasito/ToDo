@@ -20,7 +20,7 @@ export class AuthService {
   // refresh access token
   // allow
 
-  // if is refresh token is expired, login
+  // if refresh token is expired, login
 
   public isAuthenticated(): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -88,6 +88,11 @@ export class AuthService {
     const decoded = jwt_decode(accessToken);
     this.user = decoded;
     console.log(this.user);
+  }
+
+  public getUser(accessToken) {
+    const decoded = jwt_decode(accessToken);
+    this.user = decoded;
   }
 
   public getToken() {

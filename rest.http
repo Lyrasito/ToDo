@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/tasks
+GET http://localhost:3000/users
 
 ###
 POST http://localhost:3000/login
@@ -47,18 +47,20 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/5fb15c0441844f687c4c857b
+PATCH http://localhost:3000/5fb43d2017502f1ce8c1a3f7
 Content-Type: application/json
 
 {
-    "password": "123456"
+    "password": "12345"
 }
 
 ###
+PATCH http://localhost:3000/tasks/5fb3de8da892fb4e7c2d2e60
+###
 
-POST http://localhost:3000/5fb2989b07f7cf3f7028bec2/comparePasswords
+POST http://localhost:3000/5fb43d2017502f1ce8c1a3f7/comparePasswords
 Content-Type: application/json
 
 {
-    "password": "123456"
+    "password": "1234567"
 }

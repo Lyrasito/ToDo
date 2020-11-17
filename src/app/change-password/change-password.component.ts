@@ -58,8 +58,10 @@ export class ChangePasswordComponent implements OnInit {
   getUser() {
     const token = localStorage.getItem('userToken');
     this.user = jwt_decode(token);
+    console.log(this.user);
   }
   changePassword(userId, newPassword) {
+    console.log('auth service', userId);
     if (this.form.valid) {
       this.accountService
         .changePassword(userId, newPassword)

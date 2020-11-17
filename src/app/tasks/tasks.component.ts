@@ -28,10 +28,13 @@ export class TasksComponent implements OnInit {
   getTasks() {
     this.tasksService.getTasks().subscribe(
       //default sort by completed
-      (tasks) =>
-        (this.tasks = tasks.sort(function (a, b) {
+      (tasks) => {
+        console.log(tasks);
+        this.tasks = tasks.sort(function (a, b) {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
-        })),
+        });
+        console.log(this.tasks);
+      },
       (error) => {
         console.error(error);
       }
@@ -53,9 +56,12 @@ export class TasksComponent implements OnInit {
     this.tasksService.deleteTask(task).subscribe();
   }
   markCompleted(id) {
-    let task = this.tasks.find((task) => task.id === id);
+    // console.log(id);
+    let task = this.tasks.find((task) => task._id === id);
     task.completed = !task.completed;
-    this.tasksService.completeTask(task).subscribe();
+    this.tasksService
+      .completeTask(task, id)
+      .subscribe((response) => console.log(response));
   }
 
   sortByDate() {

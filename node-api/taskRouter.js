@@ -27,18 +27,17 @@ const verifyToken = (req, res, next) => {
     req.payload = payload;
     next();
   });
-  /*
-    if(!payload) {
-      res.status(401).send('Unauthorized request');
-    }
-    req.payload = payload
-    next();
-    */
 };
 
 router.get("/", verifyToken, async (req, res, next) => {
   const result = await Task.find();
   res.send(result);
+});
+
+router.patch("/:id", async (req, res, next) => {
+  await Task.updateOne({ id: req.params.id }, { $set: req.body });
+  const task = await Task.findOne({ id: req.params.id });
+  res.send({ task });
 });
 
 module.exports = router;

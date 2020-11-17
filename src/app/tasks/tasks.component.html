@@ -63,7 +63,7 @@
     <button
       class="btn btn-primary btn-sm"
       *ngIf="task.completed"
-      (click)="markCompleted(task.id)"
+      (click)="markCompleted(task._id)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
     <button
       class="btn btn-primary btn-sm"
       *ngIf="!task.completed"
-      (click)="markCompleted(task.id)"
+      (click)="markCompleted(task._id)"
     >
       Complete?
     </button>
