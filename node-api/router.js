@@ -121,12 +121,15 @@ router.post("/refresh-token", async (req, res, next) => {
 
 router.patch("/:id", async (req, res) => {
   //let user = await User.findOne({ _id: req.params.id });
-  await User.updateOne({ _id: req.params.id }, { $set: req.body });
-  user = await User.findOne({ _id: req.params.id });
-  if (user.name === "Marie" && req.body.isAdmin === false) {
-    res.sendStatus(401);
+
+  try {
+    await User.updateOne({ _id: req.params.id }, { $set: req.body });
+    user = await User.findOne({ _id: req.params.id });
+    res.send({ user });
+  } catch (err) {
+    console.log("error inside block");
+    res.send({ error: err });
   }
-  res.send({ user });
 });
 
 router.get("/users", async (req, res) => {

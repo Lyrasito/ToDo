@@ -29,7 +29,7 @@ export class AddAdminComponent implements OnInit {
         this.errorMessage = null;
         return;
       }
-      this.errorMessage = response;
+      this.errorMessage = response.error;
     });
   }
 }

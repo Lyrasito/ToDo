@@ -53,6 +53,16 @@ UserSchema.pre("updateOne", async function (next) {
       next(err);
     }
   }
+  if (this.get("isAdmin") === false) {
+    try {
+      const user = await User.findOne({ name: "Marie" });
+      if (user._id.toString() === this.getFilter()._id) {
+        next("Cannot remove admin status of that user.");
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
   next();
 });
 

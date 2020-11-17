@@ -39,7 +39,11 @@ const routes: Routes = [
     path: 'change-password',
     component: ChangePasswordComponent,
   },
-  { path: 'add-admin', component: AddAdminComponent },
+  {
+    path: 'add-admin',
+    component: AddAdminComponent,
+    canActivate: [AuthguardAdminService],
+  },
   { path: '', component: TasksComponent, canActivate: [AuthguardService] },
 ];
 
