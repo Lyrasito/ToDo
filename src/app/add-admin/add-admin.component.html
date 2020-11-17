@@ -1,0 +1,22 @@
+<h2>Change the admin status of users</h2>
+
+<ul class="list-group">
+  <li *ngFor="let user of users" class="list-group-item">
+    {{ user.name }}
+    <button
+      *ngIf="user.isAdmin"
+      (click)="changeAdminStatus(user._id, user.isAdmin)"
+      class="btn btn-danger"
+    >
+      Remove Admin
+    </button>
+    <button
+      *ngIf="!user.isAdmin"
+      (click)="changeAdminStatus(user._id, user.isAdmin)"
+      class="btn btn-primary"
+    >
+      Make Admin
+    </button>
+  </li>
+</ul>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>

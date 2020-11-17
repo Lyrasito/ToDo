@@ -8,6 +8,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthguardAdminService } from './services/authguard-admin.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     path: 'change-password',
     component: ChangePasswordComponent,
   },
+  { path: 'add-admin', component: AddAdminComponent },
   { path: '', component: TasksComponent, canActivate: [AuthguardService] },
 ];
 

@@ -120,13 +120,18 @@ router.post("/refresh-token", async (req, res, next) => {
 });
 
 router.patch("/:id", async (req, res) => {
-  let user = await User.findOne({ _id: req.params.id });
-  await user.updateOne({ $set: req.body });
-  res.send({ user: user });
+  //let user = await User.findOne({ _id: req.params.id });
+  await User.updateOne({ _id: req.params.id }, { $set: req.body });
+  user = await User.findOne({ _id: req.params.id });
+  if (user.name === "Marie" && req.body.isAdmin === false) {
+    res.sendStatus(401);
+  }
+  res.send({ user });
 });
 
-router.get("/", (req, res) => {
-  res.send("Hello");
+router.get("/users", async (req, res) => {
+  let users = await User.find();
+  res.send({ users });
 });
 
 router.get("/getData", isLoggedIn, (req, res) => {

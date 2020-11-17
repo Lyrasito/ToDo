@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CreateTaskComponent,
     RegisterComponent,
     ChangePasswordComponent,
+    AddAdminComponent,
   ],
   imports: [
     BrowserModule,
