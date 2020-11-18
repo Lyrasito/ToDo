@@ -12,6 +12,7 @@ module.exports = {
       const payload = {
         name: user.name,
         username: user.username,
+        email: user.email,
         password: user.password,
         id: user.id,
         isAdmin: user.isAdmin,
@@ -57,6 +58,7 @@ module.exports = {
       const payload = {
         name: user.name,
         username: user.username,
+        email: user.email,
         password: user.password,
         id: user.id,
         isAdmin: user.isAdmin,

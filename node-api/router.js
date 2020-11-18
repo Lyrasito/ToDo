@@ -38,6 +38,8 @@ const auth = async (req, res, next) => {
     const user = await User.findOne({ username: req.body.username });
     if (!user) throw createError.NotFound("User not registered.");
 
+    console.log("User here", user);
+
     const isMatch = await user.isValidPassword(req.body.password);
     if (!isMatch) throw createError.Unauthorized("Username/password not valid");
     if (isMatch) {
@@ -123,7 +125,7 @@ router.post("/refresh-token", async (req, res, next) => {
 });
 
 router.patch("/:id", async (req, res) => {
-  //let user = await User.findOne({ _id: req.params.id });
+  console.log("req body", req.body);
 
   try {
     await User.updateOne({ _id: req.params.id }, { $set: req.body });

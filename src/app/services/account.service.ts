@@ -17,6 +17,10 @@ export class AccountService {
     return this.http.get(this.url + 'users');
   }
 
+  public editDetails(userId, user): Observable<any> {
+    return this.http.patch(this.url + userId, user);
+  }
+
   public changePassword(userId, newPassword): Observable<any> {
     return this.http.patch(this.url + userId, {
       password: newPassword,

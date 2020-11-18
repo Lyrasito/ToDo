@@ -38,7 +38,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   showErrors() {
-    console.log(this.form.get('oldPassword').errors);
+    console.log(this.form.get('oldPassword'));
   }
 
   ngOnInit(): void {

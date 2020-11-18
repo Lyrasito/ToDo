@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //const { stringify } = require('querystring')
 const bcrypt = require("bcrypt");
+const { db } = require("../node-api/server");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,10 +12,12 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,

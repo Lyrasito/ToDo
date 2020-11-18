@@ -20,11 +20,11 @@ export class PasswordValidators {
   }
 
   static invalidPassword(authService: AuthService): AsyncValidatorFn {
-    let user = localStorage.getItem('userToken');
-    let decoded = jwt_decode(user);
+    let token = localStorage.getItem('userToken');
+    let decodedUser = jwt_decode(token);
 
     return (control: AbstractControl): Observable<ValidationErrors> => {
-      return authService.comparePasswords(control.value, decoded.id).pipe(
+      return authService.comparePasswords(control.value, decodedUser.id).pipe(
         map((result) => {
           console.log(result);
           return result ? null : { invalidPassword: true };

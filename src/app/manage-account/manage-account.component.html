@@ -1,0 +1,52 @@
+<form [formGroup]="form">
+  <button routerLink="/change-password" class="btn btn-dark">
+    Change Your Password
+  </button>
+  <div class="form-group">
+    <label for="">Username</label>
+    <input
+      formControlName="username"
+      type="text"
+      class="form-control"
+      value="user.username"
+    />
+    <label>Name</label>
+    <input
+      formControlName="name"
+      type="text"
+      class="form-control"
+      value="user.name"
+    />
+    <label>Email</label>
+    <input
+      formControlName="email"
+      class="form-control"
+      type="text"
+      value="user.email"
+    />
+    <label>Please enter your old password to continue.</label>
+    <input formControlName="oldPassword" class="form-control" />
+    <div
+      *ngIf="oldPassword.touched && oldPassword.invalid"
+      class="alert alert-danger"
+    >
+      Incorrect old password
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-dark"
+      (click)="
+        editDetails(user.id, {
+          name: name.value,
+          username: username.value,
+          email: email.value
+        })
+      "
+    >
+      Submit Changes
+    </button>
+  </div>
+</form>
+<div *ngIf="message">{{ message }}</div>
+<button class="btn btn-dark" routerLink="/tasks">Go Back</button>

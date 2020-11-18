@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthguardAdminService } from './services/authguard-admin.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { ManageAccountComponent } from './manage-account/manage-account.component';
 
 const routes: Routes = [
   {
@@ -33,16 +34,22 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [AuthguardAdminService],
+    canActivate: [AuthguardService, AuthguardAdminService],
   },
   {
     path: 'change-password',
     component: ChangePasswordComponent,
+    canActivate: [AuthguardService],
   },
   {
     path: 'add-admin',
     component: AddAdminComponent,
-    canActivate: [AuthguardAdminService],
+    canActivate: [AuthguardService, AuthguardAdminService],
+  },
+  {
+    path: 'manage-account',
+    component: ManageAccountComponent,
+    canActivate: [AuthguardService],
   },
   { path: '', component: TasksComponent, canActivate: [AuthguardService] },
 ];

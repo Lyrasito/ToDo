@@ -21,6 +21,7 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
+    autoIndex: true,
   })
   .then(() => {
     console.log("mongodb connected");
@@ -29,7 +30,9 @@ mongoose
     console.log(err.message);
   });
 
-mongoose.connection.on("connected", () => {
+const db = mongoose.connection;
+
+db.on("connected", () => {
   console.log("Mongoose connected to db");
 });
 
@@ -37,4 +40,4 @@ app.listen(3000, () => {
   console.log("App running at 3000");
 });
 
-module.exports = { app };
+module.exports = { app, db };

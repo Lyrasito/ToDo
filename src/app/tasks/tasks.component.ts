@@ -29,11 +29,11 @@ export class TasksComponent implements OnInit {
     this.tasksService.getTasks().subscribe(
       //default sort by completed
       (tasks) => {
-        console.log(tasks);
+        // console.log(tasks);
         this.tasks = tasks.sort(function (a, b) {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
         });
-        console.log(this.tasks);
+        // console.log(this.tasks);
       },
       (error) => {
         console.error(error);
@@ -57,7 +57,7 @@ export class TasksComponent implements OnInit {
   }
   markCompleted(id) {
     // console.log(id);
-    let task = this.tasks.find((task) => task._id === id);
+    let task = this.tasks.find((task) => task.id === id);
     task.completed = !task.completed;
     this.tasksService
       .completeTask(task, id)

@@ -3,6 +3,7 @@ const User = require("../Models/User.model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Task = require("../Models/Task.model");
+const { db } = require("./server");
 dotenv.config();
 
 const drop = async (collection, collectionName) => {
@@ -22,7 +23,8 @@ const drop = async (collection, collectionName) => {
 };
 
 const fillUsers = async () => {
-  drop(User, "users");
+  await drop(User, "users");
+  console.log("filling");
   for (let i = 0; i < users.length; i++) {
     const response = await fetch("http://localhost:3000/register", {
       method: "POST",
@@ -31,19 +33,20 @@ const fillUsers = async () => {
       },
       body: JSON.stringify(users[i]),
     });
-    console.log(i);
+    console.log("users", i);
   }
 };
 
 const fillTasks = async () => {
-  drop(Task, "tasks");
+  await drop(Task, "tasks");
+
   for (let i = 0; i < tasks.length; i++) {
     const response = await fetch("http://localhost:3000/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ task: tasks[i] }),
     });
-    console.log(i);
+    console.log("tasks", i);
   }
 };
 
@@ -120,6 +123,7 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
+    autoIndex: true,
   })
   .then(() => {
     console.log("mongodb connected");

@@ -15,6 +15,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { ManageAccountComponent } from './manage-account/manage-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     RegisterComponent,
     ChangePasswordComponent,
     AddAdminComponent,
+    ManageAccountComponent,
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,6 @@ export class TasksService {
   }
 
   deleteTask(task: Task) {
-    return this.http.delete(`${this.tasksUrl}/${task._id}`, this.httpOptions);
+    return this.http.delete(`${this.tasksUrl}/${task.id}`, this.httpOptions);
   }
 }

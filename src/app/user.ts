@@ -5,6 +5,7 @@ export type User = {
   id: number;
   iss: string;
   name: string;
+  email: string;
   password: string;
   username: string;
 };

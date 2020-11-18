@@ -20,7 +20,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   changeAdminStatus(id, isAdmin) {
-    const index = this.users.findIndex((user) => user._id === id);
+    const index = this.users.findIndex((user) => user.id === id);
     this.accountService.changeAdminStatus(id, isAdmin).subscribe((response) => {
       console.log(response);
       if (response.user) {

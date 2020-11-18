@@ -51,7 +51,9 @@ PATCH http://localhost:3000/5fb43d2017502f1ce8c1a3f7
 Content-Type: application/json
 
 {
-    "password": "12345"
+    "name": "Marie",
+  "username": "user",
+  "email": "mariee@email.com",
 }
 
 ###
@@ -62,5 +64,5 @@ POST http://localhost:3000/5fb43d2017502f1ce8c1a3f7/comparePasswords
 Content-Type: application/json
 
 {
-    "password": "1234567"
+    "password": "12345"
 }
