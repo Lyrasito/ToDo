@@ -35,9 +35,14 @@ router.get("/", verifyToken, async (req, res, next) => {
 });
 
 router.patch("/:id", async (req, res, next) => {
-  await Task.updateOne({ id: req.params.id }, { $set: req.body });
+  await Task.updateOne({ _id: req.params.id }, { $set: req.body });
   const task = await Task.findOne({ id: req.params.id });
   res.send({ task });
+});
+
+router.delete("/:id", async (req, res, next) => {
+  const taskToDelete = await Task.findOneAndDelete({ _id: req.params.id });
+  res.status(204).send({ message: "Successfully deleted." });
 });
 
 module.exports = router;

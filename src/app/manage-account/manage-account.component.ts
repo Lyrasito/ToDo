@@ -15,6 +15,7 @@ export class ManageAccountComponent implements OnInit {
   user: User = this.authService.user;
   form: FormGroup;
   message: string;
+  error: string;
 
   constructor(
     private authService: AuthService,
@@ -51,18 +52,15 @@ export class ManageAccountComponent implements OnInit {
   }
 
   editDetails(userId, user) {
-    /*
-    this.user.name = this.name.value;
-    this.user.username = this.username.value;
-    this.user.email = this.email.value;
-    this.user.password = this.oldPassword.value;
-*/
+    this.message = null;
+    this.error = null;
     this.accountService.editDetails(userId, user).subscribe(
       (response) => {
         this.message = 'Account details successfully updated';
-        console.log('what happened', this.user.password);
       },
-      (error) => (this.message = 'Sorry, there was a problem.')
+      (error) => {
+        this.error = error;
+      }
     );
   }
 

@@ -40,4 +40,4 @@ app.listen(3000, () => {
   console.log("App running at 3000");
 });
 
-module.exports = { app, db };
+module.exports = { app };

@@ -33,7 +33,7 @@ export class TasksService {
     );
   }
 
-  deleteTask(task: Task) {
-    return this.http.delete(`${this.tasksUrl}/${task.id}`, this.httpOptions);
+  deleteTask(id) {
+    return this.http.delete(`${this.tasksUrl}${id}`, this.httpOptions);
   }
 }

@@ -39,10 +39,11 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-        "name": "User3",
-        "username": "user3",
+        "name": "User",
+        "username": "user",
         "password": "password",
-        "isAdmin": true   
+        "email": "test@email.com",
+        "isAdmin": false   
 }
 
 ###
@@ -53,7 +54,7 @@ Content-Type: application/json
 {
     "name": "Marie",
   "username": "user",
-  "email": "mariee@email.com",
+  "email": "mariee@email.com"
 }
 
 ###
@@ -66,3 +67,8 @@ Content-Type: application/json
 {
     "password": "12345"
 }
+
+###
+
+DELETE http://localhost:3000/tasks/5fb58dfdd5e09928c87f6a25
+Content-Type: application/json

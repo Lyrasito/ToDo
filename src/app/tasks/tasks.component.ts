@@ -33,7 +33,7 @@ export class TasksComponent implements OnInit {
         this.tasks = tasks.sort(function (a, b) {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
         });
-        // console.log(this.tasks);
+        console.log(this.tasks);
       },
       (error) => {
         console.error(error);
@@ -50,15 +50,19 @@ export class TasksComponent implements OnInit {
     });
   }
   */
-  deleteTask(task) {
-    let index = this.tasks.indexOf(task);
+  deleteTask(id) {
+    let index = this.tasks.findIndex((task) => task._id === id);
     this.tasks.splice(index, 1);
-    this.tasksService.deleteTask(task).subscribe();
+    this.tasksService
+      .deleteTask(id)
+      .subscribe((response) => console.log(response));
   }
   markCompleted(id) {
     // console.log(id);
-    let task = this.tasks.find((task) => task.id === id);
+    let task = this.tasks.find((task) => task._id === id);
     task.completed = !task.completed;
+    task.completedTimestamp = Date.now();
+    console.log(task);
     this.tasksService
       .completeTask(task, id)
       .subscribe((response) => console.log(response));

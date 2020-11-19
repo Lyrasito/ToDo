@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Observable, BehaviorSubject, from } from 'rxjs';
+import { Observable, BehaviorSubject, from, of, throwError } from 'rxjs';
 import { catchError, switchMap, filter, take } from 'rxjs/operators';
 
 @Injectable({
@@ -37,7 +37,14 @@ export class TokenInterceptorService implements HttpInterceptor {
         if (error instanceof HttpErrorResponse && error.status === 401) {
           return this.handle401Error(request, next);
         } else {
-          throw new Error(error);
+          if (error.error.error.keyPattern.username) {
+            return throwError('Username already registered');
+          }
+          if (error.error.error.keyPattern.email) {
+            return throwError('Email address already registered');
+          }
+          let errorMsg = `Error Code: ${error.status}`;
+          return throwError(errorMsg);
         }
       })
     );

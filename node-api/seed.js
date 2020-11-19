@@ -3,7 +3,6 @@ const User = require("../Models/User.model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Task = require("../Models/Task.model");
-const { db } = require("./server");
 dotenv.config();
 
 const drop = async (collection, collectionName) => {

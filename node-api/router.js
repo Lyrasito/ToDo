@@ -71,6 +71,7 @@ router.post("/register", async (req, res, next) => {
     const savedUser = await user.save();
     res.send({ user: savedUser });
   } catch (err) {
+    res.status(400).send({ error: err });
     console.log(err);
   }
 });
@@ -133,7 +134,7 @@ router.patch("/:id", async (req, res) => {
     res.send({ user });
   } catch (err) {
     console.log("error inside block");
-    res.send({ error: err });
+    res.status(400).send({ error: err });
   }
 });
 
