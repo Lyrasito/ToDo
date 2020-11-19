@@ -25,6 +25,15 @@ export class TasksComponent implements OnInit {
     this.getTasks();
   }
 
+  archiveTasks() {
+    for (let i = 0; i < this.tasks.length; i++) {
+      const completed = this.tasks[i].completedTimestamp;
+      if (completed && Date.now() - completed > 259200000) {
+        this.archive(this.tasks[i]._id);
+      }
+    }
+  }
+
   getTasks() {
     this.tasksService.getTasks().subscribe(
       //default sort by completed
@@ -34,33 +43,25 @@ export class TasksComponent implements OnInit {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
         });
         console.log(this.tasks);
+        this.archiveTasks();
       },
       (error) => {
         console.error(error);
       }
     );
   }
-  /*
-  refreshToken() {
-    // let refreshToken = localStorage.getItem('refreshToken');
-    this.authService.refresh().subscribe((response) => {
-      //console.log("first refresh", localStorage.getItem('refreshToken'))
-      this.authService.setToken(response.accessToken, response.refreshToken);
-      // console.log("second refresh", localStorage.getItem('userToken'), localStorage.getItem('refreshToken'))
-    });
-  }
-  */
-  deleteTask(id) {
+
+  deleteTask(id: string) {
     let index = this.tasks.findIndex((task) => task._id === id);
     this.tasks.splice(index, 1);
     this.tasksService
       .deleteTask(id)
       .subscribe((response) => console.log(response));
   }
-  markCompleted(id) {
+  markCompleted(id: string) {
     // console.log(id);
     let task = this.tasks.find((task) => task._id === id);
-    task.completed = !task.completed;
+    task.completed = true;
     task.completedTimestamp = Date.now();
     console.log(task);
     this.tasksService
@@ -105,5 +106,11 @@ export class TasksComponent implements OnInit {
 
   isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  archive(id) {
+    return this.tasksService
+      .archiveTask(id)
+      .subscribe((response) => console.log(response));
   }
 }

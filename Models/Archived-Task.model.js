@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+const ArchivedTaskSchema = new Schema({
   submitter: {
     type: String,
     required: true,
@@ -32,9 +32,6 @@ const TaskSchema = new Schema({
   },
 });
 
-const Task = mongoose.model("task", TaskSchema);
+const ArchivedTask = mongoose.model("archived-task", ArchivedTaskSchema);
 
-/* const newTask = new Task({id: 1, submitter: "Marie", title: "Task2", description: "Task2 description", dueDate: "01/01/01", priority: 1, completed: false})
-newTask.save(); */
-
-module.exports = Task;
+module.exports = ArchivedTask;

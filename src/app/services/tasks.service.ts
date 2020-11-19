@@ -33,7 +33,19 @@ export class TasksService {
     );
   }
 
-  deleteTask(id) {
-    return this.http.delete(`${this.tasksUrl}${id}`, this.httpOptions);
+  deleteTask(id): Observable<void> {
+    return this.http.delete<void>(this.tasksUrl + id, this.httpOptions);
+  }
+
+  archiveTask(id) {
+    return this.http.post(this.tasksUrl + id + '/archive', null);
+  }
+
+  getArchivedTasks(): Observable<any> {
+    return this.http.get<any>(this.tasksUrl + '/archive').pipe(
+      map((data: { tasks: Task[] }) => {
+        return data;
+      })
+    );
   }
 }

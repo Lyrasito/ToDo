@@ -13,31 +13,31 @@ export class AccountService {
   url: string = 'http://localhost:3000/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  public getUsers(): Observable<any> {
-    return this.http.get(this.url + 'users');
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + 'users');
   }
 
-  public editDetails(userId, user): Observable<any> {
-    return this.http.patch(this.url + userId, user);
+  public editDetails(userId: string, user: User): Observable<User> {
+    return this.http.patch<User>(this.url + userId, user);
   }
 
-  public changePassword(userId, newPassword): Observable<any> {
-    return this.http.patch(this.url + userId, {
+  public changePassword(userId: string, newPassword: string): Observable<User> {
+    return this.http.patch<User>(this.url + userId, {
       password: newPassword,
     });
   }
 
-  public changeAdminStatus(userId, isAdmin): Observable<any> {
+  public changeAdminStatus(userId: string, isAdmin: boolean): Observable<any> {
     return this.http
-      .patch(this.url + userId, { isAdmin: !isAdmin })
+      .patch<User>(this.url + userId, { isAdmin: !isAdmin })
       .pipe(
         catchError((val) => of('Cannot remove admin status from that user'))
       );
   }
 
-  public registerUser(user): Observable<any> {
+  public registerUser(user: User): Observable<User> {
     return this.http
-      .post(this.url + 'register', {
+      .post<User>(this.url + 'register', {
         name: user.name,
         username: user.username,
         email: user.email,

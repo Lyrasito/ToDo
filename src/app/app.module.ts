@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { ManageAccountComponent } from './manage-account/manage-account.component';
+import { ArchivedTasksComponent } from './archived-tasks/archived-tasks.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { ManageAccountComponent } from './manage-account/manage-account.componen
     ChangePasswordComponent,
     AddAdminComponent,
     ManageAccountComponent,
+    ArchivedTasksComponent,
   ],
   imports: [
     BrowserModule,

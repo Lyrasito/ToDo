@@ -1,5 +1,5 @@
 export interface Task {
-  _id: number;
+  _id: string;
   submitter: string;
   title: string;
   description: string;

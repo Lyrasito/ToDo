@@ -58,7 +58,8 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/tasks/5fb3de8da892fb4e7c2d2e60
+POST http://localhost:3000/tasks/5fb675626cbd7c05a0a79f46/archive
+Content-Type: application/json
 ###
 
 POST http://localhost:3000/5fb43d2017502f1ce8c1a3f7/comparePasswords

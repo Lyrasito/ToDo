@@ -10,6 +10,7 @@ import { AuthguardAdminService } from './services/authguard-admin.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { ManageAccountComponent } from './manage-account/manage-account.component';
+import { ArchivedTasksComponent } from './archived-tasks/archived-tasks.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'manage-account',
     component: ManageAccountComponent,
+    canActivate: [AuthguardService],
+  },
+  {
+    path: 'archived-tasks',
+    component: ArchivedTasksComponent,
     canActivate: [AuthguardService],
   },
   { path: '', component: TasksComponent, canActivate: [AuthguardService] },

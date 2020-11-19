@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../Models/Task.model");
+const ArchivedTask = require("../Models/Archived-Task.model");
 const JWT = require("jsonwebtoken");
+
 //const { verifyToken } = require('./router')
 
 router.post("/", async (req, res, next) => {
@@ -41,8 +43,33 @@ router.patch("/:id", async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-  const taskToDelete = await Task.findOneAndDelete({ _id: req.params.id });
+  await Task.findOneAndDelete({ _id: req.params.id });
   res.status(204).send({ message: "Successfully deleted." });
+});
+
+//Archive Task
+router.post("/:id/archive", async (req, res, next) => {
+  const task = await Task.findOne({ _id: req.params.id });
+  const newTask = {
+    submitter: task.submitter,
+    title: task.title,
+    description: task.description,
+    dueDate: task.dueDate,
+    priority: task.priority,
+    completed: task.completed,
+    completedTimeStamp: task.completedTimeStamp,
+  };
+  const archivedTask = new ArchivedTask(newTask);
+  console.log("archived task", archivedTask);
+  const savedArchivedTask = await archivedTask.save();
+  await Task.findOneAndDelete({ _id: req.params.id });
+  res.send({ task: savedArchivedTask });
+});
+
+//Get Archived Tasks
+router.get("/archive", async (req, res, next) => {
+  const archivedTasks = await ArchivedTask.find();
+  res.send({ tasks: archivedTasks });
 });
 
 module.exports = router;
