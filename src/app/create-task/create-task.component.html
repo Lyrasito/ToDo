@@ -3,7 +3,11 @@
   <div class="form-row">
     <label class="control-label submitted-by"
       >Submitted by:
-      <input  class="form-control" value="{{ user ? user?.name : 'name' }}" #submitter />
+      <input
+        class="form-control"
+        value="{{ user ? user?.name : 'name' }}"
+        #submitter
+      />
     </label>
     <label class="control-label"
       >Title:
@@ -63,17 +67,19 @@
   </div>
 
   <button
-    class="btn btn-primary"
+    class="btn big-btn"
     type="button"
     (click)="
-      createTask({task: {
-        submitter: submitter.value,
-        title: title.value,
-        description: description.value,
-        dueDate: date.value,
-        priority: priority,
-        completed: false
-      }})
+      createTask({
+        task: {
+          submitter: submitter.value,
+          title: title.value,
+          description: description.value,
+          dueDate: date.value,
+          priority: priority,
+          completed: false
+        }
+      })
     "
   >
     Submit Task
@@ -81,4 +87,6 @@
   <div class="alert alert-success" *ngIf="message">{{ message }}</div>
 </form>
 
-<h3><a routerLink="/tasks">Back to Tasks</a></h3>
+<button type="button" class="btn big-btn back-btn" routerLink="/tasks">
+  Back to Tasks
+</button>

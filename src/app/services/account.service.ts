@@ -13,7 +13,7 @@ export class AccountService {
   url: string = 'http://localhost:3000/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  public getUsers(): Observable<User[]> {
+  public getUsers(): Observable<any> {
     return this.http.get<User[]>(this.url + 'users');
   }
 
@@ -35,7 +35,7 @@ export class AccountService {
       );
   }
 
-  public registerUser(user: User): Observable<User> {
+  public registerUser(user: User): Observable<any> {
     return this.http
       .post<User>(this.url + 'register', {
         name: user.name,

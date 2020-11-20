@@ -3,4 +3,33 @@
 
 body {
   margin: 30px;
+  background-color: #a39171;
+}
+
+.basic-btn {
+  background-color: #5c415d;
+  color: white;
+  border: 2px solid #886693;
+  border-radius: 10px;
+}
+
+.basic-btn:hover {
+  background-color: #886693;
+  border: 5px solid #5c415d;
+  color: white;
+  margin: 2px;
+}
+
+.big-btn {
+  background-color: #886693;
+  border: 5px solid #5c415d;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+.big-btn:hover {
+  background-color: #5c415d;
+  border: 5px solid #886693;
+  color: white;
 }

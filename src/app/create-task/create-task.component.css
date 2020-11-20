@@ -1,5 +1,7 @@
 form {
   margin-left: 50px;
+  background-color: #dcc9b6;
+  border: 2px solid #7b6c50;
 }
 
 .textarea {
@@ -12,4 +14,9 @@ form {
 
 .alert {
   margin-top: 10px;
+}
+
+.back-btn {
+  margin-left: 50px;
+  margin-top: 20px;
 }

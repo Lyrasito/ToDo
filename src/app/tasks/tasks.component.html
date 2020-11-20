@@ -1,51 +1,61 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="btn btn-lg btn-dark sticky-top" routerLink="/create">
+<nav
+  class="navbar navbar-expand-lg navbar-light {{
+    isAdmin() ? 'navbar-admin' : 'navbar-regular'
+  }}"
+>
+  <button class="btn btn-lg big-btn sticky-top" routerLink="/create">
     Create Task
   </button>
-  <button
-    *ngIf="isAdmin()"
-    class="btn btn-lg btn-dark sticky-top"
-    routerLink="/register"
-  >
-    Register New User
-  </button>
-  <button
-    *ngIf="isAdmin()"
-    class="btn btn-lg btn-dark sticky-top"
-    routerLink="/add-admin"
-  >
-    Manage Admins
-  </button>
-  <button class="btn btn-lg btn-dark" routerLink="/manage-account">
-    Manage Account
-  </button>
-  <button class="btn btn-lg btn-dark" (click)="logout()">Logout</button>
+  <div class="right-nav-btns">
+    <button
+      *ngIf="isAdmin()"
+      class="btn basic-btn sticky-top"
+      routerLink="/register"
+    >
+      Register New User
+    </button>
+    <button
+      *ngIf="isAdmin()"
+      class="btn basic-btn sticky-top"
+      routerLink="/add-admin"
+    >
+      Manage Admins
+    </button>
+    <button class="btn basic-btn" routerLink="/manage-account">
+      Manage Account
+    </button>
+    <button class="btn basic-btn" (click)="logout()">Logout</button>
+  </div>
 </nav>
-<h1>Current Tasks</h1>
+<h1 class="title">Current Tasks</h1>
 
-<label for="sort">Sort tasks by: </label>
-<select
-  class="custom-select custom-select-sm"
-  name="sort"
-  #sort
-  (change)="sortTasks(sort.value)"
->
-  <option></option>
-  <option value="priority">Priority</option>
-  <option value="date">Date</option>
-</select>
+<div class="task-header">
+  <div class="task-options">
+    <label for="sort">Sort tasks by: </label>
+    <select
+      class="custom-select custom-select-sm"
+      name="sort"
+      #sort
+      (change)="sortTasks(sort.value)"
+    >
+      <option></option>
+      <option value="priority">Priority</option>
+      <option value="date">Date</option>
+    </select>
 
-<button
-  type="button"
-  class="btn btn-primary btn-sm"
-  (click)="filterCompleted()"
->
-  <span *ngIf="!completedFilter">Filter Completed</span>
-  <span *ngIf="completedFilter">Unfilter Completed</span>
-</button>
+    <button
+      type="button"
+      class="btn btn-primary btn-sm basic-btn"
+      (click)="filterCompleted()"
+    >
+      <span *ngIf="!completedFilter">Filter Completed</span>
+      <span *ngIf="completedFilter">Unfilter Completed</span>
+    </button>
+  </div>
+</div>
 
 <ul class="list-group">
-  <li *ngFor="let task of tasks" class="list-group-item">
+  <li *ngFor="let task of tasks" class="list-group-item task-container">
     <h2>
       Title: <span>{{ task.title }}</span>
     </h2>
@@ -54,7 +64,7 @@
     </p>
     <div>
       Description:
-      <div class="description border rounded">{{ task.description }}</div>
+      <div class="description rounded">{{ task.description }}</div>
     </div>
     <small class="label">Due date: {{ task.dueDate | date }}</small>
     <p>
@@ -64,7 +74,7 @@
       <span *ngIf="task.priority === 3">Medium</span>
     </p>
     <button
-      class="btn btn-primary btn-sm"
+      class="btn basic-btn btn-sm"
       *ngIf="task.completed"
       (click)="markCompleted(task._id)"
     >
@@ -83,7 +93,7 @@
       Completed
     </button>
     <button
-      class="btn btn-primary btn-sm"
+      class="btn basic-btn btn-sm complete-btn"
       *ngIf="!task.completed"
       (click)="markCompleted(task._id)"
     >
@@ -92,7 +102,7 @@
 
     <button
       type="button"
-      class="btn btn-danger btn-sm"
+      class="btn basic-btn btn-sm delete-btn"
       (click)="deleteTask(task._id)"
     >
       Delete Task
@@ -100,10 +110,12 @@
   </li>
 </ul>
 
-<button class="btn btn-lg btn-dark" routerLink="/archived-tasks">
-  Archived Tasks
-</button>
-<p>
-  If a task has been marked as "completed" for more than three days, it will
-  automatically be put into the archive.
-</p>
+<div class="footer">
+  <p>
+    If a task has been marked as "completed" for more than three days, it will
+    automatically be put into the archive.
+  </p>
+  <button class="btn btn-lg big-btn" routerLink="/archived-tasks">
+    Archived Tasks
+  </button>
+</div>
