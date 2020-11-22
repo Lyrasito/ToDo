@@ -1,0 +1,35 @@
+.main-admin {
+  pointer-events: none;
+  opacity: 50%;
+}
+
+.card-title {
+  padding-left: 30px;
+  padding-top: 5px;
+}
+
+.users-list {
+  width: 65%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  width: 55%;
+  margin-left: 80px;
+  margin-top: 80px;
+  background-color: #dcc9b6;
+  border: 2px solid #7b6c50;
+}
+
+.list-group-item {
+  background-color: #dcc9b6;
+  border: 1px solid #7b6c50;
+}
+
+.back-btn {
+  width: 160px;
+  margin-left: 80px;
+  margin-top: 30px;
+  font-size: 25px;
+}

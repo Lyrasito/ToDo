@@ -38,18 +38,18 @@ router.get("/", verifyToken, async (req, res, next) => {
 
 router.patch("/:id", async (req, res, next) => {
   await Task.updateOne({ _id: req.params.id }, { $set: req.body });
-  const task = await Task.findOne({ id: req.params.id });
+  const task = await Task.findOne({ _id: req.params.id });
   res.send({ task });
 });
 
 router.delete("/:id", async (req, res, next) => {
-  await Task.findOneAndDelete({ _id: req.params.id });
+  await Task.findOneAndDelete({ id: req.params.id });
   res.status(204).send({ message: "Successfully deleted." });
 });
 
 //Archive Task
 router.post("/:id/archive", async (req, res, next) => {
-  const task = await Task.findOne({ _id: req.params.id });
+  const task = await Task.findOne({ id: req.params.id });
   const newTask = {
     submitter: task.submitter,
     title: task.title,
@@ -69,7 +69,7 @@ router.post("/:id/archive", async (req, res, next) => {
 //Get Archived Tasks
 router.get("/archive", async (req, res, next) => {
   const archivedTasks = await ArchivedTask.find();
-  res.send({ tasks: archivedTasks });
+  res.send(archivedTasks);
 });
 
 module.exports = router;

@@ -14,8 +14,8 @@ export class AddAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getUsers().subscribe((response) => {
-      console.log(response);
       this.users = response.users;
+      console.log(this.users);
     });
   }
 
@@ -27,9 +27,10 @@ export class AddAdminComponent implements OnInit {
         this.users[index] = response.user;
         console.log(this.users[index]);
         this.errorMessage = null;
-        return;
+      } else {
+        this.errorMessage = response;
+        console.log(this.errorMessage);
       }
-      this.errorMessage = response.error;
     });
   }
 }

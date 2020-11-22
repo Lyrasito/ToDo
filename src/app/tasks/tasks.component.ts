@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
     for (let i = 0; i < this.tasks.length; i++) {
       const completed = this.tasks[i].completedTimestamp;
       if (completed && Date.now() - completed > 259200000) {
-        this.archive(this.tasks[i]._id);
+        this.archive(this.tasks[i].id);
       }
     }
   }
@@ -52,20 +52,21 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(id: string) {
-    let index = this.tasks.findIndex((task) => task._id === id);
+    let index = this.tasks.findIndex((task) => task.id === id);
     this.tasks.splice(index, 1);
     this.tasksService
       .deleteTask(id)
       .subscribe((response) => console.log(response));
   }
   markCompleted(id: string) {
-    // console.log(id);
-    let task = this.tasks.find((task) => task._id === id);
-    task.completed = true;
-    task.completedTimestamp = Date.now();
-    console.log(task);
+    console.log('id?', id);
+    let taskIndex = this.tasks.findIndex((task) => task.id === id);
+    this.tasks[taskIndex].completed = true;
+    console.log(this.tasks[taskIndex]);
+    this.tasks[taskIndex].completedTimestamp = Date.now();
+
     this.tasksService
-      .completeTask(task, id)
+      .completeTask(this.tasks[taskIndex], id)
       .subscribe((response) => console.log(response));
   }
 

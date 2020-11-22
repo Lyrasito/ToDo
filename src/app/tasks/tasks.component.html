@@ -76,7 +76,7 @@
     <button
       class="btn basic-btn btn-sm"
       *ngIf="task.completed"
-      (click)="markCompleted(task._id)"
+      (click)="markCompleted(task.id)"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@
     <button
       class="btn basic-btn btn-sm complete-btn"
       *ngIf="!task.completed"
-      (click)="markCompleted(task._id)"
+      (click)="markCompleted(task.id)"
     >
       Complete?
     </button>
@@ -103,7 +103,7 @@
     <button
       type="button"
       class="btn basic-btn btn-sm delete-btn"
-      (click)="deleteTask(task._id)"
+      (click)="deleteTask(task.id)"
     >
       Delete Task
     </button>

@@ -33,17 +33,17 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     // make request, if error call handle401Error
     return next.handle(request).pipe(
-      catchError((error) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+      catchError((response) => {
+        if (response instanceof HttpErrorResponse && response.status === 401) {
           return this.handle401Error(request, next);
         } else {
-          if (error.error.error.keyPattern.username) {
+          if (response.error.keyPattern.username) {
             return throwError('Username already registered');
           }
-          if (error.error.error.keyPattern.email) {
+          if (response.error.keyPattern.email) {
             return throwError('Email address already registered');
           }
-          let errorMsg = `Error Code: ${error.status}`;
+          let errorMsg = `Error Code: ${response.status}`;
           return throwError(errorMsg);
         }
       })

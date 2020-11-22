@@ -20,3 +20,13 @@ form {
   margin-left: 50px;
   margin-top: 20px;
 }
+
+.create-task {
+  margin: 50px;
+}
+
+input,
+textarea {
+  border: 1px solid #7b6c50;
+  border-radius: 10px;
+}

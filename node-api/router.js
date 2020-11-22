@@ -12,27 +12,6 @@ const router = express.Router();
 
 router.use("/tasks", taskRouter);
 
-const users = [
-  {
-    username: "user",
-    password: "password",
-    name: "Marie",
-    id: 1,
-  },
-  {
-    username: "user1",
-    password: "password1",
-    name: "Kevin",
-    id: 2,
-  },
-  {
-    username: "user2",
-    password: "password2",
-    name: "Isabelle",
-    id: 3,
-  },
-];
-
 const auth = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
@@ -70,8 +49,8 @@ router.post("/register", async (req, res, next) => {
     const user = new User(newUser);
     const savedUser = await user.save();
     res.send({ user: savedUser });
-  } catch (err) {
-    res.status(400).send({ error: err });
+  } catch (error) {
+    res.status(400).send(error);
     console.log(err);
   }
 });
@@ -82,14 +61,12 @@ router.post("/login", auth, async (req, res) => {
 
   res.status(200).send({ accessToken, refreshToken });
   await User.updateOne(
-    { _id: req.user.id },
+    { id: req.user.id },
     { $set: { lastLogin: Date.now() } }
   );
 });
 
 router.post("/:id/comparePasswords", async (req, res) => {
-  console.log("here");
-  console.log(req.params.id);
   const user = await User.findOne({ _id: req.params.id });
   console.log(user);
   const isMatch = await user.isValidPassword(req.body.password);
@@ -147,4 +124,4 @@ router.get("/getData", isLoggedIn, (req, res) => {
   res.json("data");
 });
 
-module.exports = { users, router };
+module.exports = { router };

@@ -15,9 +15,9 @@ export class ArchivedTasksComponent implements OnInit {
     this.getArchivedTasks();
   }
 
-  getArchivedTasks(): any {
-    return this.tasksService.getArchivedTasks().subscribe((response) => {
-      this.tasks = response.tasks;
+  getArchivedTasks(): void {
+    this.tasksService.getArchivedTasks().subscribe((response) => {
+      this.tasks = response;
     });
   }
 }

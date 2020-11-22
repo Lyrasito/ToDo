@@ -26,6 +26,7 @@ export class TasksService {
   }
 
   completeTask(task: Task, taskId): Observable<Task> {
+    console.log('id', taskId);
     return this.http.patch<Task>(
       this.tasksUrl + taskId,
       task,
@@ -41,11 +42,7 @@ export class TasksService {
     return this.http.post(this.tasksUrl + id + '/archive', null);
   }
 
-  getArchivedTasks(): Observable<any> {
-    return this.http.get<any>(this.tasksUrl + '/archive').pipe(
-      map((data: { tasks: Task[] }) => {
-        return data;
-      })
-    );
+  getArchivedTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.tasksUrl + '/archive');
   }
 }

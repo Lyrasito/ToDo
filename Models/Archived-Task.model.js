@@ -32,6 +32,14 @@ const ArchivedTaskSchema = new Schema({
   },
 });
 
+ArchivedTaskSchema.options.toJSON = {
+  transform: function (doc, ret, options) {
+    ret.id = ret._id;
+    delete ret.__v;
+    return ret;
+  },
+};
+
 const ArchivedTask = mongoose.model("archived-task", ArchivedTaskSchema);
 
 module.exports = ArchivedTask;

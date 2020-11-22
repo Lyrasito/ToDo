@@ -32,6 +32,14 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.options.toJSON = {
+  transform: function (doc, ret, options) {
+    ret.id = ret._id;
+    delete ret.__v;
+    return ret;
+  },
+};
+
 UserSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);

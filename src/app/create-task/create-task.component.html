@@ -1,30 +1,30 @@
-<form>
+<form [formGroup]="form" class="create-task-container">
+  <div class="create-task">
   <h3>New Task</h3>
   <div class="form-row">
     <label class="control-label submitted-by"
       >Submitted by:
       <input
+        formControlName="submittedBy"
         class="form-control"
-        value="{{ user ? user?.name : 'name' }}"
-        #submitter
       />
     </label>
     <label class="control-label"
       >Title:
-      <input class="form-control" #title />
+      <input class="form-control" formControlName="title" />
     </label>
   </div>
   <div class="form-row">
     <label class="control-label"
       >Description:
-      <textarea class="form-control textarea" #description></textarea>
+      <textarea class="form-control textarea" formControlName="description"></textarea>
     </label>
   </div>
 
   <div class="form-row">
     <label class="control-label"
       >Due date:
-      <input class="form-control" type="date" #date />
+      <input class="form-control" type="date" formControlName="dueDate" />
     </label>
   </div>
   <div>
@@ -72,10 +72,10 @@
     (click)="
       createTask({
         task: {
-          submitter: submitter.value,
+          submitter: submittedBy.value,
           title: title.value,
           description: description.value,
-          dueDate: date.value,
+          dueDate: dueDate.value,
           priority: priority,
           completed: false
         }
@@ -85,6 +85,7 @@
     Submit Task
   </button>
   <div class="alert alert-success" *ngIf="message">{{ message }}</div>
+</div>
 </form>
 
 <button type="button" class="btn big-btn back-btn" routerLink="/tasks">

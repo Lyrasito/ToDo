@@ -1,24 +1,31 @@
-<h2>Change the admin status of users</h2>
+
+<div class="card">
+
+<h2 class="card-title">Change the admin status of users</h2>
 
 <ul class="list-group">
-  <li *ngFor="let user of users" class="list-group-item">
-    {{ user.name }}
+  <li *ngFor="let user of users" class="list-group-item ">
+    <div class="users-list">
+    <h4>{{ user.name }}</h4>
+    
     <button
       *ngIf="user.isAdmin"
-      (click)="changeAdminStatus(user._id, user.isAdmin)"
-      class="btn btn-danger"
+      (click)="changeAdminStatus(user.id, user.isAdmin)"
+      class="btn btn-danger {{user.name === 'Marie' ? 'main-admin' : 'user' }}"
     >
       Remove Admin
     </button>
     <button
       *ngIf="!user.isAdmin"
-      (click)="changeAdminStatus(user._id, user.isAdmin)"
+      (click)="changeAdminStatus(user.id, user.isAdmin)"
       class="btn btn-primary"
     >
       Make Admin
     </button>
+  </div>
   </li>
 </ul>
-<div *ngIf="errorMessage">{{ errorMessage }}</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+</div>
 
-<button class="btn btn-dark" routerLink="/tasks">Go Back</button>
+<button class="btn big-btn back-btn" routerLink="/tasks">Go Back</button>
