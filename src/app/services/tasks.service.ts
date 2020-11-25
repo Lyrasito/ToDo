@@ -26,7 +26,6 @@ export class TasksService {
   }
 
   completeTask(task: Task, taskId): Observable<Task> {
-    console.log('id', taskId);
     return this.http.patch<Task>(
       this.tasksUrl + taskId,
       task,

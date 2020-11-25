@@ -1,15 +1,31 @@
+h4 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 label {
   display: block;
-  text-align: center;
 }
-form {
+.login-form {
+  background-color: #dcc9b6;
+  filter: drop-shadow(5px 5px 5px #7b6c50);
   width: 400px;
-  margin-left: 400px;
-  text-align: center;
+  padding: 2%;
+  border-radius: 10px;
 }
 
 .form-control {
-  width: 60%;
   display: block;
   margin: 0 auto;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  margin-left: 35%;
 }

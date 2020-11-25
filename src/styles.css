@@ -3,21 +3,27 @@
 
 body {
   margin: 30px;
-  background-color: #a39171;
+  background-color: #d4c1a1;
 }
 
 .basic-btn {
   background-color: #5c415d;
   color: white;
-  border: 2px solid #886693;
+  border: 3px solid #886693;
   border-radius: 10px;
 }
 
 .basic-btn:hover {
-  background-color: #886693;
-  border: 5px solid #5c415d;
+  background-color: #ac82ba;
+  border: 3px solid #5c415d;
   color: white;
-  margin: 2px;
+  padding: -2px;
+}
+
+.basic-btn:focus,
+.basic-btn.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(153, 93, 156, 0.25);
 }
 
 .big-btn {
@@ -32,4 +38,11 @@ body {
   background-color: #5c415d;
   border: 5px solid #886693;
   color: white;
+}
+
+.caps-header {
+  color: #874d8a;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
 }

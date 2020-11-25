@@ -1,3 +1,32 @@
-<ul>
-  <li *ngFor="let task of tasks">{{ task.title }}</li>
-</ul>
+<table class="table table-hover">
+  <tr class="thead">
+    <th scope="col" class="date-column"><h4>Completed</h4></th>
+    <th scope="col"><h4>Task Title</h4></th>
+  </tr>
+  <tr
+    *ngFor="let task of tasks"
+    scope="row"
+    (click)="expandTask(task.id)"
+    class="trow"
+  >
+    <td>{{ task.completedTimestamp | date }}</td>
+    <td>
+      <h5>{{ task.title }}</h5>
+
+      <div *ngIf="task.expanded" class="expanded">
+        <p class="caps-header description-header">Description:</p>
+        <div class="description rounded">{{ task.description }}</div>
+        <div class="submit-complete">
+          <div class="submit">
+            <p class="caps-header">Submitted by:</p>
+            <p>{{ task.submitter }}</p>
+          </div>
+          <div class="complete">
+            <p class="caps-header">Completed by:</p>
+            <p>{{ task.completedBy }}</p>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

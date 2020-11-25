@@ -35,9 +35,7 @@ export class ManageAccountComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log(typeof this.user.name);
-  }
+  ngOnInit(): void {}
   get email() {
     return this.form.get('email');
   }

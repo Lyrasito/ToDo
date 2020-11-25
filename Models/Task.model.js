@@ -30,6 +30,10 @@ const TaskSchema = new Schema({
     type: Number,
     required: false,
   },
+  completedBy: {
+    type: String,
+    required: false,
+  },
 });
 
 TaskSchema.options.toJSON = {

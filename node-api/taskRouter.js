@@ -49,7 +49,7 @@ router.delete("/:id", async (req, res, next) => {
 
 //Archive Task
 router.post("/:id/archive", async (req, res, next) => {
-  const task = await Task.findOne({ id: req.params.id });
+  const task = await Task.findOne({ _id: req.params.id });
   const newTask = {
     submitter: task.submitter,
     title: task.title,
@@ -57,10 +57,13 @@ router.post("/:id/archive", async (req, res, next) => {
     dueDate: task.dueDate,
     priority: task.priority,
     completed: task.completed,
-    completedTimeStamp: task.completedTimeStamp,
+    completedTimestamp: task.completedTimestamp,
+    completedBy: task.completedBy,
   };
+  console.log("task", task);
+  console.log("newTask", newTask);
   const archivedTask = new ArchivedTask(newTask);
-  console.log("archived task", archivedTask);
+  console.log("archived task", archivedTask.completedBy);
   const savedArchivedTask = await archivedTask.save();
   await Task.findOneAndDelete({ _id: req.params.id });
   res.send({ task: savedArchivedTask });

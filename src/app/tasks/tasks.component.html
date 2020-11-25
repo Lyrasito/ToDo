@@ -31,7 +31,7 @@
 
 <div class="task-header">
   <div class="task-options">
-    <label for="sort">Sort tasks by: </label>
+    <label for="sort" class="caps-header">SORT TASKS BY: </label>
     <select
       class="custom-select custom-select-sm"
       name="sort"
@@ -43,11 +43,7 @@
       <option value="date">Date</option>
     </select>
 
-    <button
-      type="button"
-      class="btn btn-primary btn-sm basic-btn"
-      (click)="filterCompleted()"
-    >
+    <button type="button" class="btn-sm basic-btn" (click)="filterCompleted()">
       <span *ngIf="!completedFilter">Filter Completed</span>
       <span *ngIf="completedFilter">Unfilter Completed</span>
     </button>
@@ -57,18 +53,24 @@
 <ul class="list-group">
   <li *ngFor="let task of tasks" class="list-group-item task-container">
     <h2>
-      Title: <span>{{ task.title }}</span>
+      <span>{{ task.title }}</span>
     </h2>
     <p>
-      Submitted by: <span>{{ task.submitter }}</span>
+      <span class="caps-header">SUBMITTED BY: </span>
+      <span>{{ task.submitter }}</span>
     </p>
     <div>
-      Description:
+      <span class="caps-header">DESCRIPTION:</span>
+
       <div class="description rounded">{{ task.description }}</div>
     </div>
-    <small class="label">Due date: {{ task.dueDate | date }}</small>
+    <small class="label"
+      ><span class="caps-header">DUE DATE: </span
+      >{{ task.dueDate | date }}</small
+    >
     <p>
-      Priority:
+      <span class="caps-header">PRIORITY: </span>
+
       <span *ngIf="task.priority === 1">Emergency</span>
       <span *ngIf="task.priority === 2">High</span>
       <span *ngIf="task.priority === 3">Medium</span>

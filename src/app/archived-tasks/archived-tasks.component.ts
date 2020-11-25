@@ -13,11 +13,20 @@ export class ArchivedTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArchivedTasks();
+    //console.log(this.tasks);
   }
 
   getArchivedTasks(): void {
     this.tasksService.getArchivedTasks().subscribe((response) => {
-      this.tasks = response;
+      this.tasks = response.sort(
+        (a, b) => b.completedTimestamp - a.completedTimestamp
+      );
+      console.log(this.tasks);
     });
+  }
+
+  expandTask(id: string) {
+    const task = this.tasks.find((task) => task.id === id);
+    task.expanded = !task.expanded;
   }
 }

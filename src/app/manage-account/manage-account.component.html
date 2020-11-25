@@ -1,31 +1,40 @@
+<h5>Update your account details here</h5>
+<button routerLink="/change-password" class="btn-lg big-btn">
+  Change Your Password
+</button>
 <form [formGroup]="form">
-  <button routerLink="/change-password" class="btn btn-dark">
-    Change Your Password
-  </button>
-  <div class="form-group">
-    <label for="">Username</label>
-    <input
-      formControlName="username"
-      type="text"
-      class="form-control"
-      value="user.username"
-    />
-    <label>Name</label>
-    <input
-      formControlName="name"
-      type="text"
-      class="form-control"
-      value="user.name"
-    />
-    <label>Email</label>
-    <input
-      formControlName="email"
-      class="form-control"
-      type="text"
-      value="user.email"
-    />
-    <label>Please enter your old password to continue.</label>
-    <input formControlName="oldPassword" class="form-control" />
+  <div class="form-group manage-account">
+    <label for=""
+      >Username
+      <input
+        formControlName="username"
+        type="text"
+        class="form-control"
+        value="user.username"
+      />
+    </label>
+    <label
+      >Name
+      <input
+        formControlName="name"
+        type="text"
+        class="form-control"
+        value="user.name"
+      />
+    </label>
+    <label
+      >Email
+      <input
+        formControlName="email"
+        class="form-control"
+        type="text"
+        value="user.email"
+      />
+    </label>
+    <label
+      >Please enter your old password to continue.
+      <input formControlName="oldPassword" class="form-control" />
+    </label>
     <div
       *ngIf="oldPassword.touched && oldPassword.invalid"
       class="alert alert-danger"
@@ -35,7 +44,7 @@
 
     <button
       type="button"
-      class="btn btn-dark"
+      class="btn-lg big-btn submit-btn"
       (click)="
         editDetails(user.id, {
           name: name.value,

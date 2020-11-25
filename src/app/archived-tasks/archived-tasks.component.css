@@ -1,0 +1,55 @@
+table {
+  width: 700px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.thead {
+  background-color: #ede1d5;
+}
+
+.trow {
+  background-color: #dcc9b6;
+}
+
+h5 {
+  cursor: pointer;
+}
+
+.date-column {
+  width: 200px;
+}
+
+.submit-complete {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.submit,
+.complete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.caps-header {
+  margin-right: 5px;
+  padding-top: 3px;
+}
+
+.description-header {
+  margin-bottom: 0px;
+}
+
+.description {
+  background-color: #ede1d5;
+  border: 1px solid #7b6c50;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+@media only screen and (min-width: 1400px) {
+  table {
+    width: 50%;
+  }
+}

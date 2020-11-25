@@ -1,27 +1,28 @@
-<form class="border rounded form-group">
-  <label class="control-label"
-    >Username
-    <input class="form-control" #username />
-  </label>
-  <label
-    >Password
-    <input type="password" class="form-control" #password />
-  </label>
-  <button
-    class="btn btn-primary border"
-    (click)="
-      login(username.value, password.value);
-      username.value = '';
-      password.value = ''
-    "
-  >
-    Login
-  </button>
-  <button type="button" class="btn btn-primary border" (click)="clear()">
-    Clear
-  </button>
-  <div class="alert alert-danger" *ngIf="error">
-    Invalid username or password
-  </div>
-</form>
-
+<h4>Welcome to the To-Do List! Please log in to continue.</h4>
+<div class="login-container">
+  <form class="login-form form-group">
+    <div class="inputs">
+      <label class="control-label"
+        >Username
+        <input class="form-control" #username />
+      </label>
+      <label
+        >Password
+        <input type="password" class="form-control" #password />
+      </label>
+    </div>
+    <button
+      class="btn-lg big-btn submit-btn"
+      (click)="
+        login(username.value, password.value);
+        username.value = '';
+        password.value = ''
+      "
+    >
+      Login
+    </button>
+    <div class="alert alert-danger" *ngIf="error">
+      Invalid username or password
+    </div>
+  </form>
+</div>

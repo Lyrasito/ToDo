@@ -30,6 +30,10 @@ const ArchivedTaskSchema = new Schema({
     type: Number,
     required: false,
   },
+  completedBy: {
+    type: String,
+    required: false,
+  },
 });
 
 ArchivedTaskSchema.options.toJSON = {

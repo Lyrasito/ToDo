@@ -14,6 +14,7 @@ import { TasksService } from '../services/tasks.service';
 export class TasksComponent implements OnInit {
   tasks: Task[];
   completedFilter: Boolean;
+  user = this.authService.user;
 
   constructor(
     private tasksService: TasksService,
@@ -22,17 +23,19 @@ export class TasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.user);
     this.getTasks();
   }
 
   archiveTasks() {
     for (let i = 0; i < this.tasks.length; i++) {
       const completed = this.tasks[i].completedTimestamp;
-      if (completed && Date.now() - completed > 259200000) {
+      if (completed && Date.now() - completed > 5000) {
         this.archive(this.tasks[i].id);
       }
     }
   }
+  //259200000
 
   getTasks() {
     this.tasksService.getTasks().subscribe(
@@ -59,14 +62,17 @@ export class TasksComponent implements OnInit {
       .subscribe((response) => console.log(response));
   }
   markCompleted(id: string) {
-    console.log('id?', id);
-    let taskIndex = this.tasks.findIndex((task) => task.id === id);
-    this.tasks[taskIndex].completed = true;
-    console.log(this.tasks[taskIndex]);
-    this.tasks[taskIndex].completedTimestamp = Date.now();
+    // console.log(this.user);
+    let task = this.tasks.find((task) => task.id === id);
+    task.completed = true;
+    task.completedTimestamp = Date.now();
+    task.completedBy = this.user.name;
+
+    console.log(task.completedBy);
+    console.log('whole task', task);
 
     this.tasksService
-      .completeTask(this.tasks[taskIndex], id)
+      .completeTask(task, id)
       .subscribe((response) => console.log(response));
   }
 

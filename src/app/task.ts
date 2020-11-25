@@ -7,4 +7,6 @@ export interface Task {
   priority: number;
   completed: Boolean;
   completedTimestamp?: number;
+  expanded?: Boolean;
+  completedBy?: string;
 }
