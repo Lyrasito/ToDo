@@ -1,19 +1,22 @@
 form {
   margin-left: 50px;
   background-color: #dcc9b6;
-  border: 2px solid #7b6c50;
+  filter: drop-shadow(5px 5px 5px #7b6c50);
+  border-radius: 10px;
+  width: 800px;
+  padding-bottom: 20px;
 }
 
+h3 {
+  margin-bottom: 30px;
+  padding-top: 30px;
+}
 .textarea {
   width: 410px;
 }
 
 .submitted-by {
   margin-right: 10px;
-}
-
-.alert {
-  margin-top: 10px;
 }
 
 .back-btn {
@@ -23,10 +26,4 @@ form {
 
 .create-task {
   margin: 50px;
-}
-
-input,
-textarea {
-  border: 1px solid #7b6c50;
-  border-radius: 10px;
 }

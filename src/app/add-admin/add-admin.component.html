@@ -1,31 +1,34 @@
-
 <div class="card">
+  <div class="card-title"><h2>Change the admin status of users</h2></div>
 
-<h2 class="card-title">Change the admin status of users</h2>
+  <ul class="list-group">
+    <li *ngFor="let user of users" class="list-group-item">
+      <div class="users-list">
+        <h4>
+          {{ user.name }}
+          <span *ngIf="user.isAdmin" class="caps-header">Admin</span>
+        </h4>
 
-<ul class="list-group">
-  <li *ngFor="let user of users" class="list-group-item ">
-    <div class="users-list">
-    <h4>{{ user.name }}</h4>
-    
-    <button
-      *ngIf="user.isAdmin"
-      (click)="changeAdminStatus(user.id, user.isAdmin)"
-      class="btn btn-danger {{user.name === 'Marie' ? 'main-admin' : 'user' }}"
-    >
-      Remove Admin
-    </button>
-    <button
-      *ngIf="!user.isAdmin"
-      (click)="changeAdminStatus(user.id, user.isAdmin)"
-      class="btn btn-primary"
-    >
-      Make Admin
-    </button>
-  </div>
-  </li>
-</ul>
-<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+        <button
+          *ngIf="user.isAdmin"
+          (click)="changeAdminStatus(user.id, user.isAdmin)"
+          class="btn btn-danger {{
+            user.name === 'Marie' ? 'main-admin' : 'user'
+          }}"
+        >
+          Remove Admin
+        </button>
+        <button
+          *ngIf="!user.isAdmin"
+          (click)="changeAdminStatus(user.id, user.isAdmin)"
+          class="btn basic-btn"
+        >
+          Make Admin
+        </button>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 </div>
 
 <button class="btn big-btn back-btn" routerLink="/tasks">Go Back</button>

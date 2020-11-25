@@ -1,9 +1,17 @@
+h2 {
+  margin: 50px 0 0 10%;
+}
+
+.change-password-btn {
+  margin: 50px 0 20px 10%;
+}
+
 .manage-account {
   background-color: #dcc9b6;
   filter: drop-shadow(5px 5px 5px #7b6c50);
-  width: 600px;
-  height: 500px;
-  margin: 10%;
+  width: 450px;
+  height: 450px;
+  margin-left: 10%;
   padding: 2%;
   border-radius: 10px;
   display: flex;
@@ -12,9 +20,13 @@
 }
 
 input {
-  width: 50%;
+  width: 300px;
 }
 
 .submit-btn {
   width: 300px;
+}
+
+.back-btn {
+  margin-left: 10%;
 }

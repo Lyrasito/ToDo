@@ -1,62 +1,102 @@
-<form>
-  <div class="form-group">
-    <label for="">Name: </label>
-    <input type="text" class="form-control" #name />
-  </div>
-  <div class="form-group">
-    <label for="">Username: </label>
-    <input type="text" class="form-control" #username />
-  </div>
-  <div class="form-group">
-    <label for="">Email Address: </label>
-    <input type="text" class="form-control" #email />
-  </div>
-  <div class="form-group">
-    <label for="">Password: </label>
-    <input type="text" class="form-control" #password />
-  </div>
-  <div class="form-check">
+<h3>Enter a user's details to register them to the system</h3>
+
+<form [formGroup]="form">
+  <div class="register-user">
+    <div class="form-group">
+      <label for=""
+        >Name: <input type="text" class="form-control" formControlName="name"
+      /></label>
+    </div>
+    <div *ngIf="name.touched && name.invalid">
+      <div class="alert alert-danger">Please enter a name.</div>
+    </div>
+    <div class="form-group">
+      <label for=""
+        >Username:
+        <input type="text" class="form-control" formControlName="username"
+      /></label>
+    </div>
+    <div *ngIf="username.touched && username.invalid">
+      <div class="alert alert-danger">Please enter a username.</div>
+    </div>
+    <div class="form-group">
+      <label for=""
+        >Email Address:
+        <input type="text" class="form-control" formControlName="email"
+      /></label>
+    </div>
+    <div *ngIf="email.touched && email.invalid">
+      <div class="alert alert-danger">Please enter an email address.</div>
+    </div>
+    <div class="form-group">
+      <label for=""
+        >Password:
+        <input type="password" class="form-control" formControlName="password"
+      /></label>
+      <div>
+        This password is temporary, the user will be prompted to change it upon
+        first login.
+      </div>
+    </div>
+    <div *ngIf="password.touched && password.invalid">
+      <div class="alert alert-danger">Please enter a password.</div>
+    </div>
+
     <label for=""
       >Is this user an admin?:
-      <input
-        type="radio"
-        class="form-control"
-        name="admin"
-        value="true"
-        id="true"
-        (click)="checkAdmin(true)"
-      />
-      <label class="form-check-label" for="true">Yes</label>
-      <input
-        type="radio"
-        class="form-control"
-        name="admin"
-        value="false"
-        id="false"
-        (click)="checkAdmin(false)"
-      />
-      <label class="form-check-label" for="false">No</label>
+      <div class="form-check">
+        <label class="form-check-label" for="true">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="admin"
+            value="true"
+            id="true"
+            (click)="checkAdmin(true)"
+          />
+          Yes</label
+        >
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="false">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="admin"
+            value="false"
+            id="false"
+            (click)="checkAdmin(false)"
+          />
+          No</label
+        >
+      </div>
     </label>
+    <div *ngIf="isAdminError">
+      <div class="alert alert-danger">{{ isAdminError }}</div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn basic-btn"
+        (click)="
+          register({
+            name: name.value,
+            username: username.value,
+            email: email.value,
+            password: password.value,
+            isAdmin: isAdmin
+          })
+        "
+        [disabled]="form.invalid"
+      >
+        Submit
+      </button>
+    </div>
   </div>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    (click)="
-      register({
-        name: name.value,
-        username: username.value,
-        email: email.value,
-        password: password.value,
-        isAdmin: isAdmin
-      })
-    "
-  >
-    Submit
-  </button>
 </form>
+
 <div class="alert alert-success" *ngIf="user">
   Thanks for adding {{ user.name }} to the system!
 </div>
-<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
-<button class="btn btn-dark" routerLink="/tasks">Go Back</button>
+<div class="alert alert-danger registered-error" *ngIf="error">{{ error }}</div>
+<button class="btn-lg big-btn" routerLink="/tasks">Go Back</button>

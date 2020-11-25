@@ -59,12 +59,6 @@
   filter: drop-shadow(5px 5px 5px #7b6c50);
 }
 
-.caps-header {
-  color: #874d8a;
-  font-weight: 700;
-  font-size: 13px;
-}
-
 .description {
   background-color: #ede1d5;
   border: 1px solid #7b6c50;

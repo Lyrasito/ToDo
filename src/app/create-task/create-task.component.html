@@ -1,91 +1,107 @@
 <form [formGroup]="form" class="create-task-container">
   <div class="create-task">
-  <h3>New Task</h3>
-  <div class="form-row">
-    <label class="control-label submitted-by"
-      >Submitted by:
-      <input
-        formControlName="submittedBy"
-        class="form-control"
-      />
-    </label>
-    <label class="control-label"
-      >Title:
-      <input class="form-control" formControlName="title" />
-    </label>
-  </div>
-  <div class="form-row">
-    <label class="control-label"
-      >Description:
-      <textarea class="form-control textarea" formControlName="description"></textarea>
-    </label>
-  </div>
+    <h3>New Task</h3>
+    <div class="form-row">
+      <label class="control-label submitted-by"
+        >Submitted by:
+        <input formControlName="submittedBy" class="form-control" />
+      </label>
 
-  <div class="form-row">
-    <label class="control-label"
-      >Due date:
-      <input class="form-control" type="date" formControlName="dueDate" />
-    </label>
-  </div>
-  <div>
-    <label class="control-label"
-      >Priority Level:
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          value="1"
-          name="priority"
-          id="emergency"
-          (click)="selectPriority(1)"
-        />
-        <label class="form-check-label" for="emergency">Emergency</label>
-      </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          value="2"
-          name="priority"
-          id="high"
-          (click)="selectPriority(2)"
-        />
-        <label class="form-check-label" for="high">High</label>
-      </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          value="3"
-          name="priority"
-          id="medium"
-          (click)="selectPriority(3)"
-        />
-        <label class="form-check-label" for="medium">Medium</label>
-      </div>
-    </label>
-  </div>
+      <label class="control-label"
+        >Title:
+        <input class="form-control" formControlName="title" />
+      </label>
+    </div>
+    <div *ngIf="submittedBy.touched && submittedBy.invalid">
+      <div class="alert alert-danger">Please enter a submitter name.</div>
+    </div>
+    <div *ngIf="title.touched && title.invalid">
+      <div class="alert alert-danger">Please enter a title.</div>
+    </div>
+    <div class="form-row">
+      <label class="control-label"
+        >Description:
+        <textarea
+          class="form-control textarea"
+          formControlName="description"
+        ></textarea>
+      </label>
+    </div>
+    <div *ngIf="description.touched && description.invalid">
+      <div class="alert alert-danger">Please enter a description.</div>
+    </div>
 
-  <button
-    class="btn big-btn"
-    type="button"
-    (click)="
-      createTask({
-        task: {
-          submitter: submittedBy.value,
-          title: title.value,
-          description: description.value,
-          dueDate: dueDate.value,
-          priority: priority,
-          completed: false
-        }
-      })
-    "
-  >
-    Submit Task
-  </button>
-  <div class="alert alert-success" *ngIf="message">{{ message }}</div>
-</div>
+    <div class="form-row">
+      <label class="control-label"
+        >Due date:
+        <input class="form-control" type="date" formControlName="dueDate" />
+      </label>
+    </div>
+    <div *ngIf="dueDate.touched && dueDate.invalid">
+      <div class="alert alert-danger">Please enter a due date.</div>
+    </div>
+    <div>
+      <label class="control-label"
+        >Priority Level:
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="1"
+            name="priority"
+            id="emergency"
+            (click)="selectPriority(1)"
+          />
+          <label class="form-check-label" for="emergency">Emergency</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="2"
+            name="priority"
+            id="high"
+            (click)="selectPriority(2)"
+          />
+          <label class="form-check-label" for="high">High</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="3"
+            name="priority"
+            id="medium"
+            (click)="selectPriority(3)"
+          />
+          <label class="form-check-label" for="medium">Medium</label>
+        </div>
+      </label>
+    </div>
+    <div *ngIf="priorityError">
+      <div class="alert alert-danger">{{ priorityError }}</div>
+    </div>
+
+    <button
+      class="btn big-btn"
+      type="button"
+      (click)="
+        createTask({
+          task: {
+            submitter: submittedBy.value,
+            title: title.value,
+            description: description.value,
+            dueDate: dueDate.value,
+            priority: priority,
+            completed: false
+          }
+        })
+      "
+    >
+      Submit Task
+    </button>
+    <div class="alert alert-success" *ngIf="message">{{ message }}</div>
+  </div>
 </form>
 
 <button type="button" class="btn big-btn back-btn" routerLink="/tasks">

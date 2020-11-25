@@ -16,6 +16,7 @@ export class CreateTaskComponent implements OnInit {
   user = this.authService.user;
   form: FormGroup;
   message: string;
+  priorityError: string;
   constructor(
     private tasksService: TasksService,
     private authService: AuthService,
@@ -32,7 +33,7 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.user;
-    console.log(this.authService.user);
+    // console.log(this.authService.user);
   }
 
   get submittedBy() {
@@ -47,20 +48,19 @@ export class CreateTaskComponent implements OnInit {
   get dueDate() {
     return this.form.get('dueDate');
   }
-  /*get priority() {
-    return this.form.get('priority');
-  }
-  */
 
   createTask(task) {
+    if (!this.priority) {
+      this.priorityError = 'Please select a priority level.';
+      return;
+    }
     this.tasksService.createTask(task).subscribe((response) => {
-      //this.tasks.push(response)
       this.message = `Your task has been submitted!`;
     });
   }
 
   selectPriority(e) {
     this.priority = e;
-    console.log(this.priority);
+    this.priorityError = null;
   }
 }

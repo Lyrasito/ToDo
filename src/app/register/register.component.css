@@ -1,0 +1,28 @@
+h3 {
+  margin-left: 50px;
+}
+
+form {
+  margin-left: 50px;
+  background-color: #dcc9b6;
+  filter: drop-shadow(5px 5px 5px #7b6c50);
+  border-radius: 10px;
+  width: 800px;
+  padding-bottom: 20px;
+}
+
+.register-user {
+  padding: 30px;
+}
+
+.form-control {
+  width: 400px;
+}
+
+.big-btn {
+  margin: 30px 0 0 50px;
+}
+
+.registered-error {
+  margin-left: 50px;
+}

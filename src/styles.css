@@ -46,3 +46,14 @@ body {
   font-size: 13px;
   text-transform: uppercase;
 }
+
+input,
+textarea {
+  border: 1px solid #7b6c50;
+  border-radius: 10px;
+}
+
+.alert {
+  margin-top: 10px;
+  width: 400px;
+}

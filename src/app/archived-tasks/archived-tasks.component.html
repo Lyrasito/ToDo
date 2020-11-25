@@ -1,7 +1,14 @@
+<button type="button" class="btn big-btn back-btn" routerLink="/tasks">
+  Back to Tasks
+</button>
+
+<h2>Archived Tasks</h2>
+
 <table class="table table-hover">
   <tr class="thead">
     <th scope="col" class="date-column"><h4>Completed</h4></th>
     <th scope="col"><h4>Task Title</h4></th>
+    <th scope="col"></th>
   </tr>
   <tr
     *ngFor="let task of tasks"
@@ -11,22 +18,59 @@
   >
     <td>{{ task.completedTimestamp | date }}</td>
     <td>
-      <h5>{{ task.title }}</h5>
+      <h5 class="click">{{ task.title }}</h5>
 
       <div *ngIf="task.expanded" class="expanded">
         <p class="caps-header description-header">Description:</p>
         <div class="description rounded">{{ task.description }}</div>
         <div class="submit-complete">
           <div class="submit">
-            <p class="caps-header">Submitted by:</p>
-            <p>{{ task.submitter }}</p>
+            <p>
+              <span class="caps-header"> Submitted by: </span>
+              {{ task.submitter }}
+            </p>
           </div>
           <div class="complete">
-            <p class="caps-header">Completed by:</p>
-            <p>{{ task.completedBy }}</p>
+            <p>
+              <span class="caps-header"> Completed by: </span>
+              {{ task.completedBy }}
+            </p>
           </div>
         </div>
       </div>
     </td>
+    <td class="click">
+      <div *ngIf="!task.expanded">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="40"
+          height="40"
+          fill="#5c415d"
+        >
+          <path
+            d="M11.646 15.146L5.854 9.354a.5.5 0 01.353-.854h11.586a.5.5 0 01.353.854l-5.793 5.792a.5.5 0 01-.707 0z"
+          ></path>
+        </svg>
+      </div>
+
+      <div *ngIf="task.expanded">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="40"
+          height="40"
+          fill="#5c415d"
+        >
+          <path
+            d="M12.354 8.854l5.792 5.792a.5.5 0 01-.353.854H6.207a.5.5 0 01-.353-.854l5.792-5.792a.5.5 0 01.708 0z"
+          ></path>
+        </svg>
+      </div>
+    </td>
   </tr>
 </table>
+
+<button type="button" class="btn big-btn back-btn" routerLink="/tasks">
+  Back to Tasks
+</button>

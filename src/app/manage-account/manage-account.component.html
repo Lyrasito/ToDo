@@ -1,5 +1,6 @@
-<h5>Update your account details here</h5>
-<button routerLink="/change-password" class="btn-lg big-btn">
+<h2>Update your account details here!</h2>
+
+<button routerLink="/change-password" class="btn basic-btn change-password-btn">
   Change Your Password
 </button>
 <form [formGroup]="form">
@@ -59,4 +60,4 @@
 </form>
 <div class="alert alert-success" *ngIf="message">{{ message }}</div>
 <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
-<button class="btn btn-dark" routerLink="/tasks">Go Back</button>
+<button class="btn-lg big-btn back-btn" routerLink="/tasks">Go Back</button>
