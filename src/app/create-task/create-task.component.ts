@@ -59,8 +59,8 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
-  selectPriority(e) {
-    this.priority = e;
+  selectPriority(num) {
+    this.priority = num;
     this.priorityError = null;
   }
 }

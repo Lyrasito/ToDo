@@ -3,28 +3,20 @@
     isAdmin() ? 'navbar-admin' : 'navbar-regular'
   }}"
 >
-  <button class="btn btn-lg big-btn sticky-top" routerLink="/create">
-    Create Task
-  </button>
-  <div class="right-nav-btns">
-    <button
-      *ngIf="isAdmin()"
-      class="btn basic-btn sticky-top"
-      routerLink="/register"
-    >
-      Register New User
+  <div class="navbar-btns">
+    <button class="btn btn-lg big-btn sticky-top" routerLink="/create">
+      Create Task
     </button>
-    <button
-      *ngIf="isAdmin()"
-      class="btn basic-btn sticky-top"
-      routerLink="/add-admin"
-    >
-      Manage Admins
-    </button>
-    <button class="btn basic-btn" routerLink="/manage-account">
-      Manage Account
-    </button>
-    <button class="btn basic-btn" (click)="logout()">Logout</button>
+    <div class="right-nav-btns">
+      <a *ngIf="isAdmin()" class="" routerLink="/register">
+        Register New User
+      </a>
+      <a *ngIf="isAdmin()" class="" routerLink="/add-admin">Manage Admins </a>
+      <a class="" routerLink="/manage-account">Manage Account </a>
+      <div class="logout-btn">
+        <a routerLink="/login" (click)="logout()">Logout</a>
+      </div>
+    </div>
   </div>
 </nav>
 <h1 class="title">Current Tasks</h1>
@@ -50,8 +42,8 @@
   </div>
 </div>
 
-<ul class="list-group">
-  <li *ngFor="let task of tasks" class="list-group-item task-container">
+<div class="list">
+  <div *ngFor="let task of tasks" class="list-item task-container">
     <h2>
       <span>{{ task.title }}</span>
     </h2>
@@ -109,15 +101,15 @@
     >
       Delete Task
     </button>
-  </li>
-</ul>
+  </div>
+</div>
 
 <div class="footer">
   <p>
     If a task has been marked as "completed" for more than three days, it will
     automatically be put into the archive.
   </p>
-  <button class="btn btn-lg big-btn" routerLink="/archived-tasks">
+  <button class="btn-sm basic-btn" routerLink="/archived-tasks">
     Archived Tasks
   </button>
 </div>

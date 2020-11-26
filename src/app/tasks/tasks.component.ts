@@ -23,7 +23,6 @@ export class TasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.user);
     this.getTasks();
   }
 
@@ -45,7 +44,6 @@ export class TasksComponent implements OnInit {
         this.tasks = tasks.sort(function (a, b) {
           return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
         });
-        console.log(this.tasks);
         this.archiveTasks();
       },
       (error) => {

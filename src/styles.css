@@ -6,6 +6,14 @@ body {
   background-color: #d4c1a1;
 }
 
+a {
+  color: #5d1861;
+}
+
+a:hover {
+  color: #830c8a;
+}
+
 .basic-btn {
   background-color: #5c415d;
   color: white;

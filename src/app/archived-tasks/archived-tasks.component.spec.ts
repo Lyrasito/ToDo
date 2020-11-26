@@ -1,4 +1,6 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TasksService } from '../services/tasks.service';
 
 import { ArchivedTasksComponent } from './archived-tasks.component';
 
@@ -8,9 +10,10 @@ describe('ArchivedTasksComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArchivedTasksComponent ]
-    })
-    .compileComponents();
+      declarations: [ArchivedTasksComponent],
+      providers: [{ provide: TasksService }],
+      imports: [HttpClientModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
