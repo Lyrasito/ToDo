@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/users
+GET http://localhost:3000/tasks
 
 ###
 POST http://localhost:3000/login
@@ -39,37 +39,17 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-        "name": "User",
+        "name": "User3",
         "username": "user",
         "password": "password",
-        "email": "test@email.com",
-        "isAdmin": false   
+        "isAdmin": true   
 }
 
 ###
 
-PATCH http://localhost:3000/5fb43d2017502f1ce8c1a3f7
+PATCH http://localhost:3000/5fb15c0441844f687c4c857b
 Content-Type: application/json
 
 {
-    "name": "Marie",
-  "username": "user",
-  "email": "mariee@email.com"
+    "password": "password"
 }
-
-###
-POST http://localhost:3000/tasks/5fb675626cbd7c05a0a79f46/archive
-Content-Type: application/json
-###
-
-POST http://localhost:3000/5fb43d2017502f1ce8c1a3f7/comparePasswords
-Content-Type: application/json
-
-{
-    "password": "12345"
-}
-
-###
-
-DELETE http://localhost:3000/tasks/5fb58dfdd5e09928c87f6a25
-Content-Type: application/json

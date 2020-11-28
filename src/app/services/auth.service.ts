@@ -98,6 +98,10 @@ export class AuthService {
   public getToken() {
     return localStorage.getItem('userToken');
   }
+  public getTokenAndDecode() {
+    const token = localStorage.getItem('userToken');
+    return jwt_decode(token);
+  }
 
   getRefreshToken() {
     return localStorage.getItem('refreshToken');

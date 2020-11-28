@@ -21,7 +21,6 @@ export class ArchivedTasksComponent implements OnInit {
       this.tasks = response.sort(
         (a, b) => b.completedTimestamp - a.completedTimestamp
       );
-      console.log(this.tasks);
     });
   }
 

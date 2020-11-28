@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     return this.form.get('password');
   }
   register(user) {
-    if (!this.isAdmin) {
+    if (this.isAdmin === null) {
       this.isAdminError = 'Please select the admin status of the user.';
       return;
     }

@@ -60,10 +60,7 @@ router.post("/:id/archive", async (req, res, next) => {
     completedTimestamp: task.completedTimestamp,
     completedBy: task.completedBy,
   };
-  console.log("task", task);
-  console.log("newTask", newTask);
   const archivedTask = new ArchivedTask(newTask);
-  console.log("archived task", archivedTask.completedBy);
   const savedArchivedTask = await archivedTask.save();
   await Task.findOneAndDelete({ _id: req.params.id });
   res.send({ task: savedArchivedTask });

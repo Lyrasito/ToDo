@@ -15,7 +15,6 @@ export class AddAdminComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.getUsers().subscribe((response) => {
       this.users = response.users;
-      console.log(this.users);
     });
   }
 

@@ -56,9 +56,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   getUser() {
-    const token = localStorage.getItem('userToken');
-    this.user = jwt_decode(token);
-    console.log(this.user);
+    this.user = this.authService.getTokenAndDecode();
   }
   changePassword(userId, newPassword) {
     console.log('auth service', userId);

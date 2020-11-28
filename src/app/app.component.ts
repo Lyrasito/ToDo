@@ -8,9 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'to-do';
-  ngOnInit() {
-    const userToken = localStorage.getItem('userToken');
-    this.authService.isAuthenticated();
-  }
-  constructor(private authService: AuthService) {}
+  ngOnInit() {}
+  constructor() {}
 }

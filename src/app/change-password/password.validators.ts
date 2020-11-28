@@ -20,8 +20,7 @@ export class PasswordValidators {
   }
 
   static invalidPassword(authService: AuthService): AsyncValidatorFn {
-    let token = localStorage.getItem('userToken');
-    let decodedUser = jwt_decode(token);
+    let decodedUser = authService.getTokenAndDecode();
 
     return (control: AbstractControl): Observable<ValidationErrors> => {
       return authService.comparePasswords(control.value, decodedUser.id).pipe(

@@ -1,8 +1,15 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { TasksService } from '../services/tasks.service';
 
 import { ArchivedTasksComponent } from './archived-tasks.component';
+
+class MockTasksService {
+  getArchivedTasks() {
+    return of(['a', 'b', 'c']);
+  }
+}
 
 describe('ArchivedTasksComponent', () => {
   let component: ArchivedTasksComponent;
@@ -11,7 +18,7 @@ describe('ArchivedTasksComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ArchivedTasksComponent],
-      providers: [{ provide: TasksService }],
+      providers: [{ provide: TasksService, useClass: MockTasksService }],
       imports: [HttpClientModule],
     }).compileComponents();
   });

@@ -4,9 +4,16 @@ import { TasksComponent } from './tasks.component';
 import { TasksService } from '../services/tasks.service';
 import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '../app-routing.module';
+import { RouterTestingModule } from '@angular/router/testing';
+
+class MockAuthService {
+  isAdmin() {
+    return true;
+  }
+}
 
 describe('TasksComponent', () => {
   let component: TasksComponent;
@@ -14,7 +21,7 @@ describe('TasksComponent', () => {
   //let tasksServiceStub: Partial<TasksService>;
   let tasksArray;
   let getTasksSpy;
-
+  let authSpy;
   beforeEach(async () => {
     // stub UserService for test purposes
     tasksArray = ['A', 'B', 'C'];
@@ -28,10 +35,9 @@ describe('TasksComponent', () => {
       declarations: [TasksComponent],
       providers: [
         { provide: TasksService, useValue: tasksServiceStub },
-        { provide: AuthService },
-        { provide: Router },
+        { provide: AuthService, useClass: MockAuthService },
       ],
-      imports: [HttpClientModule, AppRoutingModule],
+      imports: [HttpClientModule, RouterTestingModule],
     }).compileComponents();
   });
 
@@ -45,10 +51,8 @@ describe('TasksComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('getTasks', () => {
-    it('should call the tasks service', () => {
-      component.ngOnInit();
-      expect(component.tasks.length).toBe(3);
-    });
+  it('should call the tasks service', () => {
+    component.ngOnInit();
+    expect(component.tasks.length).toBe(3);
   });
 });

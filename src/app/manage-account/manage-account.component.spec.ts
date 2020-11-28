@@ -5,8 +5,23 @@ import { Router } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ManageAccountComponent } from './manage-account.component';
+
+class MockAuthService {
+  user = {
+    name: 'Test user',
+    username: 'testusername',
+    email: 'test@email.com',
+  };
+  isAdmin() {
+    return true;
+  }
+  getTokenAndDecode() {
+    return this.user;
+  }
+}
 
 describe('ManageAccountComponent', () => {
   let component: ManageAccountComponent;
@@ -16,14 +31,12 @@ describe('ManageAccountComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ManageAccountComponent],
       providers: [
-        { provide: AuthService },
+        { provide: AuthService, useClass: MockAuthService },
         { provide: AccountService },
-        FormBuilder,
-        Router,
       ],
       imports: [
         HttpClientModule,
-        AppRoutingModule,
+        RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,
       ],

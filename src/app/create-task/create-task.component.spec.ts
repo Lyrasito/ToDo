@@ -6,6 +6,20 @@ import { TasksService } from '../services/tasks.service';
 
 import { CreateTaskComponent } from './create-task.component';
 
+class MockAuthService {
+  user = {
+    name: 'Test user',
+    username: 'testusername',
+    email: 'test@email.com',
+  };
+  isAdmin() {
+    return true;
+  }
+  getTokenAndDecode() {
+    return this.user;
+  }
+}
+
 describe('CreateTaskComponent', () => {
   let component: CreateTaskComponent;
   let fixture: ComponentFixture<CreateTaskComponent>;
@@ -13,7 +27,10 @@ describe('CreateTaskComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CreateTaskComponent],
-      providers: [TasksService, AuthService, FormBuilder],
+      providers: [
+        TasksService,
+        { provide: AuthService, useClass: MockAuthService },
+      ],
       imports: [HttpClientModule, FormsModule, ReactiveFormsModule],
     }).compileComponents();
   });
